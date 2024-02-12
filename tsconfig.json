@@ -1,0 +1,20 @@
+{
+    "exclude": [
+        "lib",
+        "eslint.config.js"
+    ],
+    "compilerOptions": {
+        "skipLibCheck": true,
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "verbatimModuleSyntax": true,
+        "strict": true,
+        "allowJs": true,
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+        "types": [
+            "node"
+        ]
+    }
+}

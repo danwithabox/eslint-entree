@@ -1,0 +1,45 @@
+{
+    "name": "eslint-flat-config-utils",
+    "version": "0.1.6",
+    "description": "ESLint flat config utilities to make config prototyping and usage easier",
+    "type": "module",
+    "engines": {
+        "node": ">=20.0.0"
+    },
+    "keywords": [
+        "eslint-config"
+    ],
+    "main": "./lib/index.cjs",
+    "module": "./lib/index.js",
+    "types": "./lib/index.d.ts",
+    "exports": {
+        ".": {
+            "require": {
+                "types": "./lib/index.d.cts",
+                "default": "./lib/index.cjs"
+            },
+            "import": {
+                "types": "./lib/index.d.ts",
+                "default": "./lib/index.js"
+            }
+        }
+    },
+    "files": [
+        "lib"
+    ],
+    "author": "danwithabox <danwithabox@gmail.com> (https://github.com/danwithabox)",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsup && publint",
+        "prepack": "npm run build"
+    },
+    "devDependencies": {
+        "@microsoft/api-extractor": "^7.40.1",
+        "@types/node": "^20.11.16",
+        "eslint": "^8.56.0",
+        "eslint-define-config": "^2.1.0",
+        "publint": "^0.2.7",
+        "tsup": "^8.0.2",
+        "typescript": "^5.3.3"
+    }
+}
