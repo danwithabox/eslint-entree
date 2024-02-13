@@ -1,6 +1,6 @@
 {
     "name": "eslint-flat-config-utils",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "ESLint flat config utilities to make config prototyping and usage easier",
     "type": "module",
     "engines": {
