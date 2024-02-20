@@ -31,7 +31,8 @@
     "license": "MIT",
     "scripts": {
         "build": "tsup && publint",
-        "prepack": "npm run build"
+        "prepack": "npm run build",
+        "prepublishOnly": "npm run build"
     },
     "devDependencies": {
         "@types/node": "^20.11.16",
