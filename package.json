@@ -1,5 +1,5 @@
 {
-    "name": "eslint-flat-config-utils",
+    "name": "eslint-entree",
     "version": "0.1.4",
     "description": "ESLint flat config utilities to make config prototyping and usage easier",
     "type": "module",
@@ -43,6 +43,7 @@
         "eslint": "^8.56.0"
     },
     "dependencies": {
-        "eslint-define-config": "^2.1.0"
+        "eslint-define-config": "^2.1.0",
+        "type-fest": "^4.10.2"
     }
 }
