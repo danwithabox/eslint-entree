@@ -1,5 +1,5 @@
 {
-    "name": "eslint-entree",
+    "name": "@danwithabox/eslint-entree",
     "version": "0.1.5",
     "description": "ESLint flat config utilities to make config prototyping and usage easier",
     "type": "module",
