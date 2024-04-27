@@ -36,16 +36,16 @@
         "type-check": "tsc --noEmit"
     },
     "devDependencies": {
-        "@types/node": "^20.11.19",
+        "@types/node": "^20.12.7",
         "publint": "^0.2.7",
         "tsup": "^8.0.2",
-        "typescript": "^5.3.3"
+        "typescript": "^5.4.5"
     },
     "peerDependencies": {
-        "eslint": "^8.56.0"
+        "eslint": "^9.1.1"
     },
     "dependencies": {
         "eslint-define-config": "^2.1.0",
-        "type-fest": "^4.10.2"
+        "type-fest": "^4.17.0"
     }
 }

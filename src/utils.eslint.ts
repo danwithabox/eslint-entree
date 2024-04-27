@@ -18,39 +18,49 @@ export function flatConfigAdoptOptionsFromRules<T extends Partial<Rules>>(rules:
 }
 
 /**
- * Filter rules for debugging purposes by either picking or excluding rules.
+ * Filter rules for adoption or debugging purposes by excluding and picking rules.
+ * 
+ * ---
+ * 
+ * Filtering is meant to help in the adoption process.
+ * 
+ * Ideally, the filtering is entirely removed after processing the whole codebase, and all rules are fully covering the code.
+ * 
+ * - `exclude` is used to cut down on the printed result of eslint, to set aside rules that overwhelm the output
+ * - `pick` is used to select from the remaining results the ones you currently want to fix, and to verify their adoption
+ * 
+ * After the rule(s) in `pick` are done, run eslint again, and pick again from the results.
+ * 
+ * After everything you picked is done, process the rules that you previously excluded, if there were any.
  */
-export function flatConfigFilterRules<T extends Partial<Rules>, K extends keyof T>(
+export function flatConfigFilterRules<
+    T extends Partial<Rules>,
+    const TExcludeKeys extends keyof T,
+    const TPickableKeys extends keyof Omit<T, TExcludeKeys>,
+>(
     rules: T,
-    mode: "pick",
-    selection: Array<K>,
-    debug?: boolean,
-): Simplify<Pick<T, K>>
-export function flatConfigFilterRules<T extends Partial<Rules>, K extends keyof T>(
-    rules: T,
-    mode: "exclude",
-    selection: Array<K>,
-    debug?: boolean,
-): Simplify<Omit<T, K>>
-export function flatConfigFilterRules<T extends Partial<Rules>, K extends keyof T>(
-    rules: T,
-    mode: "pick" | "exclude",
-    selection: Array<K>,
-    debug: boolean = false,
-): T {
-    if ((mode === "exclude") && (selection.length === 0)) return rules;
+    opts?: |(
+        | { exclude: readonly TExcludeKeys[], pick?: undefined, debug?: boolean, }
+        | { exclude: readonly TExcludeKeys[], pick: TPickableKeys[], debug?: boolean, }
+    )
+): Simplify<Pick<Omit<T, TExcludeKeys>, TPickableKeys>> {
+    if (opts === void 0) return rules;
 
-    const entries = Object.entries(rules);
-    const _rulesFiltered: Record<string, any> = {};
-    for (const [key, rule] of entries) {
-        if (rule !== void 0) {
-            const isEntryRuleInSelection = selection.includes(key as K);
-            if ((mode === "pick") && isEntryRuleInSelection) _rulesFiltered[key] = rule;
-            if ((mode === "exclude") && !isEntryRuleInSelection) _rulesFiltered[key] = rule;
-        }
+    const { exclude, pick, debug = false, } = opts;
+    const rulesFiltered: Partial<Rules> = {};
+
+    if (pick !== void 0) {
+        for (const key_picked of pick) rulesFiltered[key_picked as string] = rules[key_picked];
+    } else {
+        for (const [key, rule] of Object.entries(rules)) rulesFiltered[key] = rule;
+        for (const key_excluded of exclude) delete rulesFiltered[key_excluded as string];
     }
-    const rulesFiltered = _rulesFiltered as T;
-    const entriesFiltered = Object.entries(rulesFiltered);
-    if (debug) console.info(`Filtered ${entries.length} rules in "${mode}" mode down to ${entriesFiltered.length}:`, rulesFiltered);
-    return rulesFiltered;
+
+    if (debug) {
+        const count_rules: number = Object.keys(rules).length;
+        const count_filtered: number = Object.keys(rulesFiltered).length;
+        console.info(`Filtered ${count_rules} rules down to ${count_filtered}. Result:`, rulesFiltered);
+    }
+
+    return rulesFiltered as T;
 }
