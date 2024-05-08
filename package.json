@@ -1,13 +1,20 @@
 {
     "name": "@danwithabox/eslint-entree",
     "version": "0.3.0",
-    "description": "ESLint flat config utilities to make config prototyping and usage easier",
+    "description": "An appetizer for linting, focusing on incremental, non-jarring adoption of rules, with the provided ESLint flat config utilities",
     "type": "module",
     "engines": {
         "node": "^18.18.0 || >=20.0.0"
     },
     "keywords": [
-        "eslint-config"
+        "eslint-config",
+        "eslint-entree",
+        "eslint",
+        "starter",
+        "adoption",
+        "typescript",
+        "vue",
+        "vue3"
     ],
     "main": "./lib/index.cjs",
     "module": "./lib/index.js",

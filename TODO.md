@@ -2,6 +2,9 @@ TODO:
 - [ ] vitest all utils
     - [ ] test code coverage capability of vitest
 - [ ] nonsense: flatConfigFilterRules without second parameter causes empty object return type
+- [ ] optional peer deps for TS and vue linting
+    - [ ] is it even necessary?
+    - [ ] dynamic import, if either is not installed, throw error
 
 --- typescript
 TODO
