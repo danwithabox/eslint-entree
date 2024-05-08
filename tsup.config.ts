@@ -4,9 +4,9 @@ export default defineConfig({
     entry: [
         "src/index.ts",
     ],
-    outDir: "lib",
-    clean: true,
-    dts: true,
+    outDir:    "lib",
+    clean:     true,
+    dts:       true,
     sourcemap: true,
-    format: ["esm", "cjs"],
+    format:    ["esm", "cjs"],
 });

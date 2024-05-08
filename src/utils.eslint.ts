@@ -36,13 +36,13 @@ export function flatConfigAdoptOptionsFromRules<T extends Partial<Rules>>(rules:
 export function flatConfigFilterRules<
     T extends Partial<Rules>,
     const TExcludeKeys extends keyof T,
-    const TPickableKeys extends keyof Omit<T, TExcludeKeys>,
+    const TPickableKeys extends keyof Omit<T, TExcludeKeys>
 >(
     rules: T,
     opts?: |(
         | { exclude: readonly TExcludeKeys[], pick?: undefined, debug?: boolean, }
         | { exclude: readonly TExcludeKeys[], pick: TPickableKeys[], debug?: boolean, }
-    )
+    ),
 ): Simplify<Pick<Omit<T, TExcludeKeys>, TPickableKeys>> {
     if (opts === void 0) return rules;
 
