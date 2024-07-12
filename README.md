@@ -1,154 +1,219 @@
-# ESLint entrée - make ESLint config authoring appetizing
+# ESLint entrée - an appetizer for linting 🥂
 
-# ESLint entrée - for TypeScript
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-An appetizer for linting.
+Focusing on helping you with an incremental, non-jarring adoption of ESLint for TypeScript and VSCode.
 
-Focusing on incremental, non-jarring adoption of rules for TypeScript.
+## Overview
 
-Uses `@danwithabox/eslint-entree`.
+ESLint is truly excellent for keeping codebases tidy, but I found adopting it to be wholly unappetizing:
+- typing support was subpar, making setup confusing
+- presets were bulky and wreaked havoc on existing codebases
+- lots of config, reading documentation, and trivia knowledge needed just to run your first lint
 
-Or if you consider an "entrée" to be the main course, cherrypick what you like from the **filterable** [tiny bundled config](#bundled-config).
+What I wished for was:
+- a quick way to see ESLint in action in an existing codebase
+- tools to type-safely define rules I'm interested in
+- tools to enable those rules incrementally, adapting the codebase rule-by-rule
+- a working setup I could dig into to study, copy, and in-house it
 
-### Goal:
-To make the adoption of ESLint appetizing.
+This package is what I settled on.
 
-Why is it unappetizing by default?
-- adopting ESLint is hindered by its learning curve
-- to ease that, "config presets" are provided
-- which are massive, causing unease:
-    - for new projects, you're unsure what rules you commit to
-    - for mature projects, thousands of linting errors pop up, you're jarred
-- your choices are:
-    - meticulously overriding the preset
-    - building yours from scratch
-- neither is very fun, and is full of [pitfalls](#learning-curve-savings)!
+And this readme is your one-stop-shop for getting your first ESLint-enabled project up-and-running for TypeScript!
 
-How does this package help?
-- the plugins are preconfigured without rules, no need to research its setup
-- you define rules **with typed keys** via `flatConfigDefineRules` (even in vanilla JS)
-- the **typed keys** enable comfy filtering via `flatConfigFilterRules`
-- now you can easily `"pick"` or `"exclude"` the rules you want as you adopt them, instead of messing with the config itself
+## Guide
 
-First, you probably just want reassurance that it works - pick one rule from the [tiny bundled config](#bundled-config), see how your codebase likes it, and go from there. Pick more, or copy some from elsewhere!
+### Install
+```bash
+$ npm install @danwithabox/eslint-entree --save-dev
+```
 
-And if you ever want to completely in-house the plugins too, simply peek into this library and copy what you need.
+### First run
+Create the ESLint [flat config](https://eslint.org/docs/latest/use/configure/configuration-files) file:
+> `eslint.config.js`
+```ts
+// @ts-check
+import { entreeDefineRules, entree_rules_typeScript, entreeFilterRules, defineFlatConfig, entreeConfigs } from "@danwithabox/eslint-entree";
 
-### Commitment:
-Keeping this up-to-date, as I want to use this for my own project.
+const rulesCandidates = entreeDefineRules({
+    ...entree_rules_typeScript(), // a sane, minimal set of rules, to quickly pick and choose from
+});
 
-### Bundled config:
-The bundled config mostly provides stylistic lints that are easy to check whether they work or not.
+// type-safe filtering of candidate rules
+const rules = entreeFilterRules(rulesCandidates, {
+    exclude: [],
+});
 
-### Filtering:
-Grab a set of rules, feed it into `flatConfigFilterRules`, pick one, check what lints it catches!
+export default defineFlatConfig([
+    ...entreeConfigs.typeScriptExample({ typescriptRules: rules, gitignore: true, }), // Ignore linting files defined in .gitignore with `gitignore: true` using "eslint-config-flat-gitignore" under the hood
+]);
+```
 
-> GIF
+Now run `npx eslint` to see the rules from `entree_rules_typeScript()` in action.
 
-Or exclude stuff you are unsure about for now!
+### Filtering
 
-> GIF
+Let's say you're in an existing, messy codebase, and `npx eslint` spit out an overwhelming amount of issues.
 
-### Learning curve savings:
-When I first tried ESLint, I soon found myself in good ol' **_JS ecosystem quicksand_**, sinking in a pile of questions:
+An ergonomic and quick way to cut down on the noise, and see your codebase issues one rule at a time, is to adjust the filter.
 
-- what is flat config, can I use it yet (yes)
-- where are all the damn type hints and TS support (basically doesn't exist)
-- why is TSLint deprecated (good reasons)
-- why are stylistic rules replacing TSLint rules (great reasons)
-- how does it work in VSCode (see TODO: VSCODE CONFIG)
-- what the hell are "type-aware" TS rules (mostly, just slow)
-- which rules are broken (more than I expected, especially indent)
-- does the config even work, where do I check the logs (good luck non-VSCode users)
-- why are all the presets massive (everyone is very opinionated)
-- how do I know which rules do what (docs, see TODO: LINK TO DOCS)
+The filter has two properties: `exclude`, and `include`. Both provide type-safe autocompletion of rules defined using `entreeDefineRules()`.
 
-So after I researched all that, I started building my own config, and made tools to make authoring it easier for the mature codebase I was trying to use it in.
+First apply `exclude` to ignore a very common issue, to "de-noise" the lint warnings:
 
-### Other notes:
-Inspired by antfu's config that helped me a lot by inspecting how it worked, but which I found a bit too much for a minimal test.
+```ts
+// type-safe filtering of candidate rules
+const rules = entreeFilterRules(rulesCandidates, {
+    exclude: [
+        "@stylistic/comma-dangle",
+    ],
+});
+```
 
-Written in JS instead of TS because:
-- the ESLint team isn't interested in adopting TS, unfortunately (https://github.com/eslint/rfcs/pull/50#issuecomment-595916427)
-- so keeping the source in JS makes it easier to peek into the package and borrow ideas for your own setup
+Run `npx eslint`, and from the less noisy output, identify some rules you want to actually focus on fixing.
 
-Fortunately, JSDoc and `@ts-check` is enough to express and use TS types.
+Provide those rules to `pick`:
 
-# ESLint entrée - for Vue 3
+```ts
+// type-safe filtering of candidate rules
+const rules = entreeFilterRules(rulesCandidates, {
+    exclude: [
+        "@stylistic/comma-dangle",
+    ],
+    pick: [
+        "@stylistic/eol-last",
+        "@stylistic/no-extra-semi",
+    ],
+});
+```
 
-An appetizer for linting.
+> [!NOTE]
+> Passing an empty array to `pick` means "pick nothing", and so no rules will be applied.
+> 
+> You have to remove the `pick` prop to disable picking!
 
-Focusing on incremental, non-jarring adoption of rules for Vue 3.
+Run `npx eslint`, and see only those issues pop up.
 
-Uses `@danwithabox/eslint-entree` and `@danwithabox/eslint-entree-typescript`.
+Fix them manually, then repeat the process:
+- run `npx eslint` to identify rules you want to adopt
+- revise your filter's `exclude` and `pick` props
+- fix issues identified by `npx eslint`
+- repeat
 
-Or if you consider an "entrée" to be the main course, cherrypick what you like from the **filterable** [tiny bundled config](#bundled-config).
+### Configure VSCode
+Editor support is lovely:
+- VSCode can highlight linting issues in-editor with the [official ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) installed
+- the extension's log can be seen in the debug console, check that if something feels off
+- you may find that you have to restart the ESLint server for VSCode to pick up config changes
 
-### Goal:
-To make the adoption of ESLint appetizing.
+For what it's worth, as of writing this, my project-level `.vscode/settings.json` files look like this:
+```json
+{
+    "eslint.useFlatConfig": true,
+    "eslint.format.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "never",
+    },
 
-Why is it unappetizing by default?
-- adopting ESLint is hindered by its learning curve
-- to ease that, "config presets" are provided
-- which are massive, causing unease:
-    - for new projects, you're unsure what rules you commit to
-    - for mature projects, thousands of linting errors pop up, you're jarred
-- your choices are:
-    - meticulously overriding the preset
-    - building yours from scratch
-- neither is very fun, and is full of [pitfalls](#learning-curve-savings)!
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.formatOnSave": true,
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.formatOnSave": true,
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.formatOnSave": true,
+    },
+}
 
-How does this package help?
-- the plugins are preconfigured without rules, no need to research its setup
-- you define rules **with typed keys** via `flatConfigDefineRules` (even in vanilla JS)
-- the **typed keys** enable comfy filtering via `flatConfigFilterRules`
-- now you can easily `"pick"` or `"exclude"` the rules you want as you adopt them, instead of messing with the config itself
+```
 
-TODO: explain what the plugin does - lints vue SFC, TS inside it, adopts TS rules for vue template expressions too
+## Goals
 
-First, you probably just want reassurance that it works - pick one rule from the [tiny bundled config](#bundled-config), see how your codebase likes it, and go from there. Pick more, or copy some from elsewhere!
+### Use this package as a starting point for your own config
 
-And if you ever want to completely in-house the plugins too, simply peek into this library and copy what you need.
+This package encourages you to familiarize yourself with ESLint through it, but not necessarily to keep it in your code forever. 
 
-### Commitment:
-Keeping this up-to-date, as I want to use this for my own project.
+*Copy my homework, but change it up a little bit!*
 
-### Bundled config:
-The bundled config only cares about the state-of-the-art variation of Vue 3 consisting of:
-- [TypeScript](https://vuejs.org/guide/typescript/overview#usage-in-single-file-components)
-- [Compostion API](https://vuejs.org/guide/extras/composition-api-faq.html)
-- [`<script setup>`](https://vuejs.org/api/sfc-script-setup.html)
+I wrote this package with copying bits of it in mind. Especially the TypeScript and Vue configs, they are a good starting point to base your own config off of!
 
-### Filtering:
-Grab a set of rules, feed it into `flatConfigFilterRules`, pick one, check what lints it catches!
+### Sane defaults, all of them skippable
+The bundled rules and configs are completely subjective and of my own taste. I like stylistic fixes, and I like TypeScript and Vue, so I bundled these.
 
-> GIF
+With [filtering](#filtering), you can easily cut down on the bundled rules.
 
-Or exclude stuff you are unsure about for now!
+I first wanted to extract them into their own packages, but the fracturing was more annoying than beneficial, and since this is a development-time package anyway, that shouldn't end up in production bundles. So I just left my subjective taste in as minor bloat.
 
-> GIF
+I may add more configs in the future, if I start using additional stuff.
 
-### Learning curve savings:
-When I first tried ESLint, I soon found myself in good ol' **_JS ecosystem quicksand_**, sinking in a pile of questions:
+### Being a source of truth for the latest-and-greatest in ESLint
+I aim to keep all contained plugins and configs up-to-date, handle deprecations, and to adopt improvements to ESLint as soon as possible.
 
-- what is flat config, can I use it yet (yes)
-- where are all the damn type hints and TS support (basically doesn't exist)
-- why is TSLint deprecated (good reasons)
-- why are stylistic rules replacing TSLint rules (great reasons)
-- how does it work in VSCode (see TODO: VSCODE CONFIG)
-- what the hell are "type-aware" TS rules (mostly, just slow)
-- which rules are broken (more than I expected, especially indent)
-- does the config even work, where do I check the logs (good luck non-VSCode users)
-- why are all the presets massive (everyone is very opinionated)
-- how do I know which rules do what (docs, see TODO: LINK TO DOCS)
+### Keeping it vanilla
+There are some fancy things, like [antfu's solution to support `.ts` configs](https://www.npmjs.com/package/eslint-ts-patch). It's very nice, but it's also incompatible with [the above goal](#use-this-package-as-a-starting-point-for-your-own-config) - I want people to be able to copy-paste from this source into their own ESLint config and have it work without further considerations.
 
-So after I researched all that, I started building my own config, and made tools to make authoring it easier for the mature codebase I was trying to use it in.
+This is why this repo is built upon `.js` files where ESLint is used, since [that's what the ESLint team officially supports](https://github.com/eslint/rfcs/pull/50#issuecomment-595916427).
 
-### Other notes:
-Inspired by antfu's config that helped me a lot by inspecting how it worked, but which I found a bit too much for a minimal test.
+Fortunately, JSDoc and `@ts-check` is enough to express and use TypeScript types in `.js` files too.
 
-Written in JS instead of TS because:
-- the ESLint team isn't interested in adopting TS, unfortunately (https://github.com/eslint/rfcs/pull/50#issuecomment-595916427)
-- so keeping the source in JS makes it easier to peek into the package and borrow ideas for your own setup
+## Non-goals
 
-Fortunately, JSDoc and `@ts-check` is enough to express and use TS types.
+### This library is **NOT** meant to "take over" ESLint configurations!
+
+The provided configurations are meant to be a starting point, that you can plug-and-play, then peek under the hood and make your own configuration. See the relevant [goal](#use-this-package-as-a-starting-point-for-your-own-config).
+
+Configs are way too complicated to abstract away, I instead provide working examples that you can use as a starting point!
+
+Keeping `entreeDefineRules()` and `entreeFilterRules()` can be beneficial, as they are just minimal wrappers over the vanilla ESLint developer experience, they do not lock you in to this library.
+
+### This library is **NOT** meant to solve ESLint ecosystem type safety!
+
+The ESLint team is [adamant about only supporting  `.js` config files](https://github.com/eslint/rfcs/pull/50#issuecomment-595916427), and I respect that.
+
+An unfortunate effect of that, however, is underdeveloped type-safety for ESLint plugins. Lots of rules have no type definitions for their options. I made an effort to enhance my utils with types where possible, but you will most likely be relying on documentations for options instead of the IDE, and that's normal.
+
+An exception to that are the core ESLint rules, they are well-typed, and `entreeDefineRules()` makes use of it.
+
+### This library will **NOT** provide the [fancy sort of typescript-eslint rules](https://typescript-eslint.io/getting-started/typed-linting)
+
+I have no idea why it's "recommended", it slows in-editor linting to a crawl, and I have never missed any of their supposed benefits.
+
+### This library will NOT decide what the word "entrée" means
+I realized too late that it means the "main course" instead of "appetizer" for some ~~insane~~ people, but hey, if you keep using this package then it's sorta the main course, right?
+
+## Assurances
+I use this package for my own projects so "dogfooding" and maintenance is guaranteed, and I have moved a large codebase to ESLint using this.
+
+## ESLint ecosystem questions & answers
+When I first tried ESLint, I soon faced many questions. Here's my light rant masquerading as helpful answers:
+
+- what's "legacy config" and "flat config"?
+    - `.eslintrc.js` is what you will find in old tutorials, the new standard is `eslint.config.js`
+- where are all the damn type hints and TS support?
+    - they basically don't exist, good luck
+- why is TSLint deprecated?
+    - Good Reasons™, if you see a tutorial mention it, look for a new one
+- what's the fuss with "stylistic rules"?
+    - read this: https://eslint.style/guide/why
+    - if you consider using [Prettier](https://prettier.io/) for stylistic fixes, I personally don't recommend it, I prefer granular control over code style, hence making this package
+- what the hell are "type-aware" TS rules?
+    - mostly, they are just [slow and annoying](https://typescript-eslint.io/getting-started/typed-linting/#how-is-performance), but if you want to try them, feel free to do so
+    - even though `typescript-eslint` recommends them, I never once missed them and this package will not support them out-of-the-box
+- which rules are broken?
+    - more than I expected, especially [`typescript-eslint`'s `indent`](https://eslint.style/rules/ts/indent), it's [absolutely knackered](https://github.com/typescript-eslint/typescript-eslint/issues/1824), and as such I didn't even enable it
+- are all the plugin presets really that massive and opinionated?
+    - yes, and I don't know why, I found them all extremely annoying, and they are half the reason for making this package
+- am I really supposed to read through hundreds of rules to pick the ones I want?
+    - yep, and some of them might be even conflicting!
+    - and this is why I provide [sane defaults](#sane-defaults-all-of-them-skippable)
+
+## Acknowledgements
+The goals of the package are inspired by [antfu's config](https://github.com/antfu/eslint-config), digging into it helped me get up to speed with ESLint much faster.
+
+## Feedback & Contribution
+Feel free to voice concerns about ease-of-use, or if you found something confusing in the ESLint ecosystem that should be covered here. This repo is meant to be a help in getting up to speed with ESLint!

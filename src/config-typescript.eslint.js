@@ -1,9 +1,9 @@
 //@ts-check
 /// <reference types="@stylistic/eslint-plugin/define-config-support" />
 import { defineFlatConfig } from "eslint-define-config";
-import { flatConfigDefineRules } from "./utils.eslint";
+import { entreeDefineRules } from "./utils.eslint";
 import plugin_stylistic from "@stylistic/eslint-plugin";
-import tseslint from "typescript-eslint";
+import typescript_eslint from "typescript-eslint";
 
 /**
  * Provides the needed plugin and parser config.
@@ -19,10 +19,10 @@ export function config_typescript(rules) {
             /** @type { import("@stylistic/eslint-plugin/define-config-support") } */
             "@stylistic":         plugin_stylistic,
             /** @type { any } */
-            "@typescript-eslint": tseslint.plugin,
+            "@typescript-eslint": typescript_eslint.plugin,
         },
         languageOptions: {
-            parser:        tseslint.parser,
+            parser:        typescript_eslint.parser,
             parserOptions: {
                 sourceType: "module",
             },
@@ -32,21 +32,21 @@ export function config_typescript(rules) {
     return flatConfig_typescript;
 }
 
-export function rules_config_typescript() {
-    const rules = flatConfigDefineRules({
-        ...rules_config_typescript_eslint(),
-        ...rules_config_typescript_stylistic(),
-        ...rules_config_typescript_filteredBy_recommended(),
-        ...rules_config_typescript_filteredBy_tsstylistic(),
-        ...rules_config_typescript_filteredBy_strict(),
-        ...rules_config_typescript_filteredBy_miscellaneous(),
+export function entree_rules_typeScript() {
+    const rules = entreeDefineRules({
+        ...entree_rules_typeScript_eslint(),
+        ...entree_rules_typeScript_stylistic(),
+        ...entree_rules_typeScript_filteredBy_recommended(),
+        ...entree_rules_typeScript_filteredBy_tsStylistic(),
+        ...entree_rules_typeScript_filteredBy_strict(),
+        ...entree_rules_typeScript_filteredBy_miscellaneous(),
     });
 
     return rules;
 }
 
-export function rules_config_typescript_eslint() {
-    return flatConfigDefineRules({
+export function entree_rules_typeScript_eslint() {
+    return entreeDefineRules({
         "no-compare-neg-zero":          ["error"],
         "no-debugger":                  ["error"],
         "no-irregular-whitespace":      ["error", { skipComments: true, skipJSXText: true, skipRegExps: true, skipStrings: true, skipTemplates: true, }],
@@ -75,8 +75,8 @@ export function rules_config_typescript_eslint() {
     });
 }
 
-export function rules_config_typescript_stylistic() {
-    return flatConfigDefineRules({
+export function entree_rules_typeScript_stylistic() {
+    return entreeDefineRules({
         "@stylistic/type-annotation-spacing":     ["warn", { before: false, after: true, overrides: { arrow: { before: true, after: true, }, }, }],
         "@stylistic/space-before-function-paren": ["warn", { anonymous: "always", named: "never", asyncArrow: "always", }],
         "@stylistic/semi":                        ["warn", "always"],
@@ -128,8 +128,8 @@ export function rules_config_typescript_stylistic() {
 }
 
 /** Subset selected from https://typescript-eslint.io/rules/?=recommended-xtypeInformation */
-export function rules_config_typescript_filteredBy_recommended() {
-    return flatConfigDefineRules({
+export function entree_rules_typeScript_filteredBy_recommended() {
+    return entreeDefineRules({
         "@typescript-eslint/ban-ts-comment": ["error", {
             "ts-expect-error": "allow-with-description",
             "ts-ignore":       "allow-with-description",
@@ -145,7 +145,7 @@ export function rules_config_typescript_filteredBy_recommended() {
         "no-loss-of-precision":                    ["off"],
         "@typescript-eslint/no-loss-of-precision": ["error"],
         "@typescript-eslint/no-misused-new":       ["error"],
-        "@typescript-eslint/no-namespace":         ["error", {
+        "@typescript-eslint/no-namespace":         ["warn", {
             allowDeclarations:    false,
             allowDefinitionFiles: true,
         }],
@@ -156,20 +156,20 @@ export function rules_config_typescript_filteredBy_recommended() {
 }
 
 /** Subset selected from https://typescript-eslint.io/rules/?=stylistic-xtypeInformation */
-export function rules_config_typescript_filteredBy_tsstylistic() {
-    return flatConfigDefineRules({
-        "@typescript-eslint/consistent-type-assertions": ["error", {
+export function entree_rules_typeScript_filteredBy_tsStylistic() {
+    return entreeDefineRules({
+        "@typescript-eslint/consistent-type-assertions": ["warn", {
             assertionStyle:              "as",
             objectLiteralTypeAssertions: "allow-as-parameter",
         }],
-        "@typescript-eslint/no-confusing-non-null-assertion": ["error"],
+        "@typescript-eslint/no-confusing-non-null-assertion": ["warn"],
     });
 }
 
 /** Subset selected from https://typescript-eslint.io/rules/?=xrecommended-strict-xstylistic-xtypeInformation */
-export function rules_config_typescript_filteredBy_strict() {
-    return flatConfigDefineRules({
-        "@typescript-eslint/no-invalid-void-type": ["error", {
+export function entree_rules_typeScript_filteredBy_strict() {
+    return entreeDefineRules({
+        "@typescript-eslint/no-invalid-void-type": ["warn", {
             allowInGenericTypeArguments: true,
             allowAsThisParameter:        true,
         }],
@@ -179,12 +179,12 @@ export function rules_config_typescript_filteredBy_strict() {
 }
 
 /** Subset selected from https://typescript-eslint.io/rules/?=xrecommended-xstrict-xstylistic-xtypeInformation-xdeprecated */
-export function rules_config_typescript_filteredBy_miscellaneous() {
-    return flatConfigDefineRules({
+export function entree_rules_typeScript_filteredBy_miscellaneous() {
+    return entreeDefineRules({
         "@typescript-eslint/no-import-type-side-effects": ["warn"],
 
         "no-unused-expressions":                    ["off"],
-        "@typescript-eslint/no-unused-expressions": ["error", {
+        "@typescript-eslint/no-unused-expressions": ["warn", {
             allowShortCircuit:    true,
             allowTernary:         true,
             allowTaggedTemplates: true,

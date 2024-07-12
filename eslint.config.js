@@ -1,17 +1,17 @@
 // @ts-check
-import { defineFlatConfig, entreeConfigVue3SOTA, rules_config_typescript, rules_config_vue, flatConfigFilterRules, flatConfigDefineRules } from "@danwithabox/eslint-entree";
+import { entreeDefineRules, entree_rules_typeScript, entree_rules_vue3, entreeFilterRules, defineFlatConfig, entreeConfigs } from "@danwithabox/eslint-entree";
 
-const typescript = flatConfigFilterRules(
-    flatConfigDefineRules({
-        ...rules_config_typescript(),
+const typescriptRules = entreeFilterRules(
+    entreeDefineRules({
+        ...entree_rules_typeScript(),
     }),
     {
         exclude: [],
     },
 );
-const vue = flatConfigFilterRules(
-    flatConfigDefineRules({
-        ...rules_config_vue(),
+const vue3Rules = entreeFilterRules(
+    entreeDefineRules({
+        ...entree_rules_vue3(),
     }),
     {
         exclude: [],
@@ -19,5 +19,5 @@ const vue = flatConfigFilterRules(
 );
 
 export default defineFlatConfig([
-    ...entreeConfigVue3SOTA({ typescript, vue, }),
+    ...entreeConfigs.vue3Example({ typescriptRules, vue3Rules, gitignore: true, }),
 ]);

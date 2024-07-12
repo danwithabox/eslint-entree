@@ -1,9 +1,9 @@
 //@ts-check
 import { defineFlatConfig } from "eslint-define-config";
-import { flatConfigAdoptOptionsFromRules, flatConfigDefineRules } from "./utils.eslint";
-import { rules_config_typescript_stylistic } from "./config-typescript.eslint";
+import { entreeAdoptOptionsFromRules, entreeDefineRules } from "./utils.eslint";
+import { entree_rules_typeScript_stylistic } from "./config-typescript.eslint";
 import plugin_stylistic from "@stylistic/eslint-plugin";
-import tseslint from "typescript-eslint";
+import typescript_eslint from "typescript-eslint";
 // @ts-expect-error: No type definition
 import plugin_vue from "eslint-plugin-vue";
 // @ts-expect-error: No type definition
@@ -26,7 +26,7 @@ export function config_vue(rules) {
             /** @type { import("@stylistic/eslint-plugin/define-config-support") } */
             "@stylistic":         plugin_stylistic,
             /** @type { any } */
-            "@typescript-eslint": tseslint.plugin,
+            "@typescript-eslint": typescript_eslint.plugin,
             vue:                  plugin_vue,
         },
         processor:       plugin_vue_processor,
@@ -38,7 +38,7 @@ export function config_vue(rules) {
                 },
                 extraFileExtensions: [".vue"],
                 /** @type { any } */
-                parser:              tseslint.parser,
+                parser:              typescript_eslint.parser,
                 sourceType:          "module",
             },
         },
@@ -48,14 +48,14 @@ export function config_vue(rules) {
 }
 
 /** All rules checked as of eslint-plugin-vue@9.19.2 */
-export function rules_config_vue() {
-    const rules = flatConfigDefineRules({
-        ...rules_config_vue_base(),
-        ...rules_config_vue_essential(),
-        ...rules_config_vue_strongly_recommended(),
-        ...rules_config_vue_recommended(),
-        ...rules_config_vue_uncategorized(),
-        ...rules_config_vue_extension_rules_forTemplateExpressions(),
+export function entree_rules_vue3() {
+    const rules = entreeDefineRules({
+        ...entree_rules_vue3_base(),
+        ...entree_rules_vue3_essential(),
+        ...entree_rules_vue3_strongly_recommended(),
+        ...entree_rules_vue3_recommended(),
+        ...entree_rules_vue3_uncategorized(),
+        ...entree_rules_vue3_extension_rules_forTemplateExpressions(),
     });
 
     return rules;
@@ -64,8 +64,8 @@ export function rules_config_vue() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function rules_config_vue_base() {
-    return flatConfigDefineRules({
+export function entree_rules_vue3_base() {
+    return entreeDefineRules({
         "vue/comment-directive": ["error"],
     });
 }
@@ -73,8 +73,8 @@ export function rules_config_vue_base() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function rules_config_vue_essential() {
-    return flatConfigDefineRules({
+export function entree_rules_vue3_essential() {
+    return entreeDefineRules({
         "vue/no-dupe-keys":                           ["error"],
         "vue/no-side-effects-in-computed-properties": ["error"],
         "vue/no-ref-as-operand":                      ["error"],
@@ -125,8 +125,8 @@ export function rules_config_vue_essential() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function rules_config_vue_strongly_recommended() {
-    return flatConfigDefineRules({
+export function entree_rules_vue3_strongly_recommended() {
+    return entreeDefineRules({
         "vue/attribute-hyphenation":        ["warn"],
         "vue/html-closing-bracket-spacing": ["warn"],
         "vue/html-self-closing":            ["warn", {
@@ -157,8 +157,8 @@ export function rules_config_vue_strongly_recommended() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function rules_config_vue_recommended() {
-    return flatConfigDefineRules({
+export function entree_rules_vue3_recommended() {
+    return entreeDefineRules({
         "vue/attributes-order": ["warn", {
             order: [
                 "DEFINITION",
@@ -186,9 +186,9 @@ export function rules_config_vue_recommended() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function rules_config_vue_uncategorized() {
+export function entree_rules_vue3_uncategorized() {
     const globalComponents = ["RouterView", "RouterLink"];
-    return flatConfigDefineRules({
+    return entreeDefineRules({
         "vue/block-order":                   ["warn", { order: ["template", "script:not([setup])", "script[setup]", "style[scoped]", "style:not([scoped])"], }],
         "vue/no-duplicate-attr-inheritance": ["error"],
         "vue/no-required-prop-with-default": ["error", { autofix: true, }],
@@ -202,7 +202,7 @@ export function rules_config_vue_uncategorized() {
         "vue/no-unused-refs":               ["error"],
         "vue/padding-line-between-blocks":  ["warn", "always"],
         "vue/prefer-define-options":        ["warn"],
-        "vue/prefer-separate-static-class": ["error"],
+        "vue/prefer-separate-static-class": ["warn"],
         "vue/require-macro-variable-name":  ["error", {
             defineProps: "props",
             defineEmits: "emit",
@@ -232,9 +232,9 @@ export function rules_config_vue_uncategorized() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function rules_config_vue_extension_rules_forTemplateExpressions() {
-    const { getOptionsOf: getOptionsOf_stylistic, } = flatConfigAdoptOptionsFromRules(rules_config_typescript_stylistic());
-    return flatConfigDefineRules({
+export function entree_rules_vue3_extension_rules_forTemplateExpressions() {
+    const { getOptionsOf: getOptionsOf_stylistic, } = entreeAdoptOptionsFromRules(entree_rules_typeScript_stylistic());
+    return entreeDefineRules({
         // "vue/array-bracket-newline":   getOptionsOf_stylistic("@stylistic/array-bracket-newline"),
         "vue/array-bracket-spacing": getOptionsOf_stylistic("@stylistic/array-bracket-spacing"),
         // "vue/array-element-newline":   getOptionsOf_stylistic("@stylistic/array-element-newline"),

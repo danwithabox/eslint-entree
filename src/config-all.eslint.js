@@ -1,42 +1,45 @@
 //@ts-check
 import { defineFlatConfig } from "eslint-define-config";
-import { config_typescript, rules_config_typescript } from "./config-typescript.eslint.js";
-import { config_vue, rules_config_vue } from "./config-vue.eslint.js";
+import { config_typescript } from "./config-typescript.eslint.js";
+import { config_vue } from "./config-vue.eslint.js";
 import { gitignore } from "./index.js";
 
 export * from "./config-typescript.eslint.js";
 export * from "./config-vue.eslint.js";
 
 /**
- * @param {Partial<{ typescript: Partial<import("eslint-define-config").Rules>, gitignore: boolean, }>=} rules 
+ * @param {{ typescriptRules: Partial<import("eslint-define-config").Rules>, gitignore: boolean, }} config 
  * @returns {Array<import("eslint-define-config").FlatESLintConfig>}
  */
-export function entreeConfigTypeScript(rules) {
-    const _rules_config_typescript = rules?.typescript ?? rules_config_typescript();
-    const _rules_config_gitignore = rules?.gitignore ?? true;
+function entreeConfig_typeScriptExample(config) {
+    const { typescriptRules, gitignore: _gitignore, } = config;
 
     return defineFlatConfig([
-        ...(_rules_config_gitignore ? [gitignore()] : []),
-        config_typescript(_rules_config_typescript),
+        ...(_gitignore ? [gitignore()] : []),
+        config_typescript(typescriptRules),
     ]);
 }
 
 /**
- * @param {Partial<{
- *      typescript: Partial<import("eslint-define-config").Rules>,
- *      vue: Partial<import("eslint-define-config").Rules>,
+ * @param {{
+ *      typescriptRules: Partial<import("eslint-define-config").Rules>,
+ *      vue3Rules: Partial<import("eslint-define-config").Rules>,
  *      gitignore: boolean,
- * }>=} rules 
+ * }} config 
  * @returns {Array<import("eslint-define-config").FlatESLintConfig>}
  */
-export function entreeConfigVue3SOTA(rules) {
-    const _rules_config_typescript = rules?.typescript ?? rules_config_typescript();
-    const _rules_config_vue = rules?.vue ?? rules_config_vue();
-    const _rules_config_gitignore = rules?.gitignore ?? true;
+function entreeConfig_vue3Example(config) {
+    const { typescriptRules, vue3Rules, gitignore: _gitignore, } = config;
 
     return defineFlatConfig([
-        ...(_rules_config_gitignore ? [gitignore()] : []),
-        config_typescript(_rules_config_typescript),
-        config_vue({ ..._rules_config_typescript, ..._rules_config_vue, }),
+        ...(_gitignore ? [gitignore()] : []),
+        config_typescript(typescriptRules),
+        config_vue({ ...typescriptRules, ...vue3Rules, }),
     ]);
 }
+
+
+export const entreeConfigs = {
+    typeScriptExample: entreeConfig_typeScriptExample,
+    vue3Example:       entreeConfig_vue3Example,
+};
