@@ -1,7 +1,7 @@
 {
     "name": "@danwithabox/eslint-entree",
     "version": "0.3.2",
-    "description": "An appetizer for linting, focusing on incremental, non-jarring adoption of rules, with the provided ESLint flat config utilities",
+    "description": "An appetizer for linting 🥂",
     "type": "module",
     "engines": {
         "node": "^18.18.0 || >=20.0.0"

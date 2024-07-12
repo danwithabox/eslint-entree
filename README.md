@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Focusing on helping you with an incremental, non-jarring adoption of ESLint for TypeScript and VSCode.
+Focusing on helping you with an incremental, non-jarring adoption of ESLint for TypeScript and Vue.
 
 ## Overview
 
