@@ -136,10 +136,11 @@ export function entree_rules_typeScript_filteredBy_recommended() {
             "ts-nocheck":      "allow-with-description",
             "ts-check":        false,
         }],
-        "@typescript-eslint/ban-types": ["error", {
-            extendDefaults: true,
-            types:          {},
-        }],
+
+        "@typescript-eslint/no-empty-object-type":    ["error", { allowInterfaces: "never", allowObjectTypes: "never", }],
+        "@typescript-eslint/no-unsafe-function-type": ["error"],
+        "@typescript-eslint/no-wrapper-object-types": ["error"],
+
         "@typescript-eslint/no-duplicate-enum-values": ["error"],
 
         "no-loss-of-precision":                    ["off"],

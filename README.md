@@ -103,7 +103,7 @@ Fix them manually, then repeat the process:
 ### Configure VSCode
 Editor support is lovely:
 - VSCode can highlight linting issues in-editor with the [official ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) installed
-- the extension's log can be seen in the debug console, check that if something feels off
+- the extension's log can be seen in VSCode's Output tab, check that if something feels off
 - you may find that you have to restart the ESLint server for VSCode to pick up config changes
 
 For what it's worth, as of writing this, my project-level `.vscode/settings.json` files look like this:
