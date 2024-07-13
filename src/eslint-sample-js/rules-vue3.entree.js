@@ -1,61 +1,16 @@
-//@ts-check
-import { defineFlatConfig } from "eslint-define-config";
-import { entreeAdoptOptionsFromRules, entreeDefineRules } from "./utils.eslint";
-import { entree_rules_typeScript_stylistic } from "./config-typescript.eslint";
-import plugin_stylistic from "@stylistic/eslint-plugin";
-import typescript_eslint from "typescript-eslint";
-// @ts-expect-error: No type definition
-import plugin_vue from "eslint-plugin-vue";
-// @ts-expect-error: No type definition
-import plugin_vue_processor from "eslint-plugin-vue/lib/processor.js";
-import parser_vue from "vue-eslint-parser";
-
-/**
- * Provides the needed plugin and parser config.
- * 
- * @template { Partial<import("eslint-define-config").Rules> } T
- * @param { T } rules
- */
-export function config_vue(rules) {
-    const GLOB_VUE = "**/*.vue";
-    const GLOB_SVG_VUE = "**/*.svg.vue";
-    const flatConfig_vue = defineFlatConfig({
-        files:   [GLOB_VUE],
-        ignores: [GLOB_SVG_VUE],
-        plugins: {
-            /** @type { import("@stylistic/eslint-plugin/define-config-support") } */
-            "@stylistic":         plugin_stylistic,
-            /** @type { any } */
-            "@typescript-eslint": typescript_eslint.plugin,
-            vue:                  plugin_vue,
-        },
-        processor:       plugin_vue_processor,
-        languageOptions: {
-            parser:        parser_vue,
-            parserOptions: {
-                ecmaFeatures: {
-                    jsx: false,
-                },
-                extraFileExtensions: [".vue"],
-                /** @type { any } */
-                parser:              typescript_eslint.parser,
-                sourceType:          "module",
-            },
-        },
-        rules,
-    });
-    return flatConfig_vue;
-}
+// @ts-check
+import { entreeAdoptOptionsFromRules, entreeDefineRules } from "../entree-utils.js";
+import { typeScript_stylistic } from "./rules-typescript.entree.js";
 
 /** All rules checked as of eslint-plugin-vue@9.19.2 */
-export function entree_rules_vue3() {
+export function vue3() {
     const rules = entreeDefineRules({
-        ...entree_rules_vue3_base(),
-        ...entree_rules_vue3_essential(),
-        ...entree_rules_vue3_strongly_recommended(),
-        ...entree_rules_vue3_recommended(),
-        ...entree_rules_vue3_uncategorized(),
-        ...entree_rules_vue3_extension_rules_forTemplateExpressions(),
+        ...vue3_base(),
+        ...vue3_essential(),
+        ...vue3_strongly_recommended(),
+        ...vue3_recommended(),
+        ...vue3_uncategorized(),
+        ...vue3_extension_rules_forTemplateExpressions(),
     });
 
     return rules;
@@ -64,7 +19,7 @@ export function entree_rules_vue3() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function entree_rules_vue3_base() {
+export function vue3_base() {
     return entreeDefineRules({
         "vue/comment-directive": ["error"],
     });
@@ -73,7 +28,7 @@ export function entree_rules_vue3_base() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function entree_rules_vue3_essential() {
+export function vue3_essential() {
     return entreeDefineRules({
         "vue/no-dupe-keys":                           ["error"],
         "vue/no-side-effects-in-computed-properties": ["error"],
@@ -125,7 +80,7 @@ export function entree_rules_vue3_essential() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function entree_rules_vue3_strongly_recommended() {
+export function vue3_strongly_recommended() {
     return entreeDefineRules({
         "vue/attribute-hyphenation":        ["warn"],
         "vue/html-closing-bracket-spacing": ["warn"],
@@ -157,7 +112,7 @@ export function entree_rules_vue3_strongly_recommended() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function entree_rules_vue3_recommended() {
+export function vue3_recommended() {
     return entreeDefineRules({
         "vue/attributes-order": ["warn", {
             order: [
@@ -186,7 +141,7 @@ export function entree_rules_vue3_recommended() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function entree_rules_vue3_uncategorized() {
+export function vue3_uncategorized() {
     const globalComponents = ["RouterView", "RouterLink"];
     return entreeDefineRules({
         "vue/block-order":                   ["warn", { order: ["template", "script:not([setup])", "script[setup]", "style[scoped]", "style:not([scoped])"], }],
@@ -232,8 +187,8 @@ export function entree_rules_vue3_uncategorized() {
 /**
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
-export function entree_rules_vue3_extension_rules_forTemplateExpressions() {
-    const { getOptionsOf: getOptionsOf_stylistic, } = entreeAdoptOptionsFromRules(entree_rules_typeScript_stylistic());
+export function vue3_extension_rules_forTemplateExpressions() {
+    const { getOptionsOf: getOptionsOf_stylistic, } = entreeAdoptOptionsFromRules(typeScript_stylistic());
     return entreeDefineRules({
         // "vue/array-bracket-newline":   getOptionsOf_stylistic("@stylistic/array-bracket-newline"),
         "vue/array-bracket-spacing": getOptionsOf_stylistic("@stylistic/array-bracket-spacing"),

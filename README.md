@@ -45,7 +45,10 @@ const rules = entreeFilterRules(rulesCandidates, {
 });
 
 export default defineFlatConfig([
-    ...entreeConfigs.typeScriptExample({ typescriptRules: rules, gitignore: true, }), // Ignore linting files defined in .gitignore with `gitignore: true` using "eslint-config-flat-gitignore" under the hood
+    ...entreeConfigs.typeScriptExample({
+        typeScriptRules: rules,
+        gitignore: true, // Uses "eslint-config-flat-gitignore" under the hood to take `.gitignore` files into account
+    }),
 ]);
 ```
 
@@ -131,6 +134,16 @@ For what it's worth, as of writing this, my project-level `.vscode/settings.json
 }
 
 ```
+## Copy
+vscode github peek extension
+    not the bundled!
+look for src/eslint-entree-sample-js/
+    should be config-*.entree.js
+jsdocs for all eslintConfigs.* and eslintRules.*
+    pointing to docs
+[Samples to copy for yourself](src/eslint-entree-sample-js/readme.md)
+TODO: enable typescript-eslint types
+TODO: documentation should cover how to ditch `entreeDefineRules()`
 
 ## Goals
 

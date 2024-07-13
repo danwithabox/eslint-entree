@@ -1,51 +1,20 @@
-//@ts-check
-/// <reference types="@stylistic/eslint-plugin/define-config-support" />
-import { defineFlatConfig } from "eslint-define-config";
-import { entreeDefineRules } from "./utils.eslint";
-import plugin_stylistic from "@stylistic/eslint-plugin";
-import typescript_eslint from "typescript-eslint";
+// @ts-check
+import { entreeDefineRules } from "../entree-utils.js";
 
-/**
- * Provides the needed plugin and parser config.
- * 
- * @template { Partial<import("eslint-define-config").Rules> } T
- * @param { T } rules
- */
-export function config_typescript(rules) {
-    const GLOB_SRC = "**/*.?([cm])[jt]s";
-    const flatConfig_typescript = defineFlatConfig({
-        files:   [GLOB_SRC],
-        plugins: {
-            /** @type { import("@stylistic/eslint-plugin/define-config-support") } */
-            "@stylistic":         plugin_stylistic,
-            /** @type { any } */
-            "@typescript-eslint": typescript_eslint.plugin,
-        },
-        languageOptions: {
-            parser:        typescript_eslint.parser,
-            parserOptions: {
-                sourceType: "module",
-            },
-        },
-        rules,
-    });
-    return flatConfig_typescript;
-}
-
-export function entree_rules_typeScript() {
+export function typeScript() {
     const rules = entreeDefineRules({
-        ...entree_rules_typeScript_eslint(),
-        ...entree_rules_typeScript_stylistic(),
-        ...entree_rules_typeScript_filteredBy_recommended(),
-        ...entree_rules_typeScript_filteredBy_tsStylistic(),
-        ...entree_rules_typeScript_filteredBy_strict(),
-        ...entree_rules_typeScript_filteredBy_miscellaneous(),
+        ...typeScript_eslint(),
+        ...typeScript_stylistic(),
+        ...typeScript_filteredBy_recommended(),
+        ...typeScript_filteredBy_tsStylistic(),
+        ...typeScript_filteredBy_strict(),
+        ...typeScript_filteredBy_miscellaneous(),
     });
 
     return rules;
 }
 
-export function entree_rules_typeScript_eslint() {
+export function typeScript_eslint() {
     return entreeDefineRules({
         "no-compare-neg-zero":          ["error"],
         "no-debugger":                  ["error"],
@@ -75,7 +44,7 @@ export function entree_rules_typeScript_eslint() {
     });
 }
 
-export function entree_rules_typeScript_stylistic() {
+export function typeScript_stylistic() {
     return entreeDefineRules({
         "@stylistic/type-annotation-spacing":     ["warn", { before: false, after: true, overrides: { arrow: { before: true, after: true, }, }, }],
         "@stylistic/space-before-function-paren": ["warn", { anonymous: "always", named: "never", asyncArrow: "always", }],
@@ -128,7 +97,7 @@ export function entree_rules_typeScript_stylistic() {
 }
 
 /** Subset selected from https://typescript-eslint.io/rules/?=recommended-xtypeInformation */
-export function entree_rules_typeScript_filteredBy_recommended() {
+export function typeScript_filteredBy_recommended() {
     return entreeDefineRules({
         "@typescript-eslint/ban-ts-comment": ["error", {
             "ts-expect-error": "allow-with-description",
@@ -157,7 +126,7 @@ export function entree_rules_typeScript_filteredBy_recommended() {
 }
 
 /** Subset selected from https://typescript-eslint.io/rules/?=stylistic-xtypeInformation */
-export function entree_rules_typeScript_filteredBy_tsStylistic() {
+export function typeScript_filteredBy_tsStylistic() {
     return entreeDefineRules({
         "@typescript-eslint/consistent-type-assertions": ["warn", {
             assertionStyle:              "as",
@@ -168,7 +137,7 @@ export function entree_rules_typeScript_filteredBy_tsStylistic() {
 }
 
 /** Subset selected from https://typescript-eslint.io/rules/?=xrecommended-strict-xstylistic-xtypeInformation */
-export function entree_rules_typeScript_filteredBy_strict() {
+export function typeScript_filteredBy_strict() {
     return entreeDefineRules({
         "@typescript-eslint/no-invalid-void-type": ["warn", {
             allowInGenericTypeArguments: true,
@@ -180,7 +149,7 @@ export function entree_rules_typeScript_filteredBy_strict() {
 }
 
 /** Subset selected from https://typescript-eslint.io/rules/?=xrecommended-xstrict-xstylistic-xtypeInformation-xdeprecated */
-export function entree_rules_typeScript_filteredBy_miscellaneous() {
+export function typeScript_filteredBy_miscellaneous() {
     return entreeDefineRules({
         "@typescript-eslint/no-import-type-side-effects": ["warn"],
 

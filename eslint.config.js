@@ -1,23 +1,17 @@
 // @ts-check
-import { entreeDefineRules, entree_rules_typeScript, entree_rules_vue3, entreeFilterRules, defineFlatConfig, entreeConfigs } from "@danwithabox/eslint-entree";
+import { defineFlatConfig, entreeFilterRules, entreeConfigs, entreeRules } from "@danwithabox/eslint-entree";
 
-const typescriptRules = entreeFilterRules(
-    entreeDefineRules({
-        ...entree_rules_typeScript(),
-    }),
-    {
-        exclude: [],
-    },
-);
-const vue3Rules = entreeFilterRules(
-    entreeDefineRules({
-        ...entree_rules_vue3(),
-    }),
-    {
-        exclude: [],
-    },
-);
+const typeScriptRules = entreeFilterRules(entreeRules.typeScript(), {
+    exclude: [],
+});
+const vue3Rules = entreeFilterRules(entreeRules.vue3(), {
+    exclude: [],
+});
 
 export default defineFlatConfig([
-    ...entreeConfigs.vue3Example({ typescriptRules, vue3Rules, gitignore: true, }),
+    ...entreeConfigs.vue3({
+        typeScriptRules,
+        vue3Rules,
+        gitignore: true,
+    }),
 ]);
