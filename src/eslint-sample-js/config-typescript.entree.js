@@ -1,17 +1,19 @@
 //@ts-check
+/// <reference types="@eslint-types/typescript-eslint" />
 /// <reference types="@stylistic/eslint-plugin/define-config-support" />
 import { defineFlatConfig } from "eslint-define-config";
 import plugin_stylistic from "@stylistic/eslint-plugin";
 import typescript_eslint from "typescript-eslint";
 
 /**
- * Provides the needed plugin and parser config.
+ * Provides the needed plugin and parser config for TypeScript.
  * 
  * @template { Partial<import("eslint-define-config").Rules> } T
  * @param { T } rules
  */
 function config_typescript(rules) {
     const GLOB_SRC = "**/*.?([cm])[jt]s";
+
     const flatConfig_typescript = defineFlatConfig({
         files:   [GLOB_SRC],
         plugins: {
@@ -28,6 +30,7 @@ function config_typescript(rules) {
         },
         rules,
     });
+
     return flatConfig_typescript;
 }
 

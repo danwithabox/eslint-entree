@@ -43,6 +43,7 @@
         "type-check": "tsc --noEmit"
     },
     "devDependencies": {
+        "@eslint-types/typescript-eslint": "^7.5.0",
         "@types/node": "^20.14.10",
         "publint": "^0.2.8",
         "tsup": "^8.1.0",
@@ -58,7 +59,7 @@
         "eslint-define-config": "^2.1.0",
         "eslint-plugin-vue": "^9.27.0",
         "type-fest": "^4.21.0",
-        "typescript-eslint": "^8.0.0-alpha.41",
+        "typescript-eslint": "^8.0.0-alpha.44",
         "vue-eslint-parser": "^9.4.3"
     }
 }

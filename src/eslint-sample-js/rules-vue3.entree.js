@@ -2,7 +2,13 @@
 import { entreeAdoptOptionsFromRules, entreeDefineRules } from "../entree-utils.js";
 import { typeScript_stylistic } from "./rules-typescript.entree.js";
 
-/** All rules checked as of eslint-plugin-vue@9.19.2 */
+/**
+ * Combines all hand-picked rule collections for Vue 3.
+ * 
+ * https://eslint.vuejs.org/rules/
+ * 
+ * All rules checked as of eslint-plugin-vue@9.19.2
+ */
 export function vue3() {
     const rules = entreeDefineRules({
         ...vue3_base(),
@@ -17,6 +23,10 @@ export function vue3() {
 }
 
 /**
+ * You may want to use the full set of rules provided by `vue3()`: {@link vue3}
+ * 
+ * Subset selected from https://eslint.vuejs.org/rules/#base-rules-enabling-correct-eslint-parsing
+ * 
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
 export function vue3_base() {
@@ -26,6 +36,10 @@ export function vue3_base() {
 }
 
 /**
+ * You may want to use the full set of rules provided by `vue3()`: {@link vue3}
+ * 
+ * Subset selected from https://eslint.vuejs.org/rules/#priority-a-essential-error-prevention
+ * 
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
 export function vue3_essential() {
@@ -78,6 +92,10 @@ export function vue3_essential() {
 }
 
 /**
+ * You may want to use the full set of rules provided by `vue3()`: {@link vue3}
+ * 
+ * Subset selected from https://eslint.vuejs.org/rules/#priority-b-strongly-recommended-improving-readability
+ * 
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
 export function vue3_strongly_recommended() {
@@ -110,6 +128,10 @@ export function vue3_strongly_recommended() {
 }
 
 /**
+ * You may want to use the full set of rules provided by `vue3()`: {@link vue3}
+ * 
+ * Subset selected from https://eslint.vuejs.org/rules/#priority-c-recommended-potentially-dangerous-patterns
+ * 
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
 export function vue3_recommended() {
@@ -138,7 +160,12 @@ export function vue3_recommended() {
         "vue/no-v-html":             ["warn"],
     });
 }
+
 /**
+ * You may want to use the full set of rules provided by `vue3()`: {@link vue3}
+ * 
+ * Subset selected from https://eslint.vuejs.org/rules/#uncategorized
+ * 
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
 export function vue3_uncategorized() {
@@ -185,10 +212,16 @@ export function vue3_uncategorized() {
 }
 
 /**
+ * You may want to use the full set of rules provided by `vue3()`: {@link vue3}
+ * 
+ * Subset selected from https://eslint.vuejs.org/rules/#extension-rules
+ * 
  * All rules checked as of eslint-plugin-vue@9.19.2
  */
 export function vue3_extension_rules_forTemplateExpressions() {
     const { getOptionsOf: getOptionsOf_stylistic, } = entreeAdoptOptionsFromRules(typeScript_stylistic());
+
+    // Commented out rules have no "@stylistic/*" equivalent (for now)
     return entreeDefineRules({
         // "vue/array-bracket-newline":   getOptionsOf_stylistic("@stylistic/array-bracket-newline"),
         "vue/array-bracket-spacing": getOptionsOf_stylistic("@stylistic/array-bracket-spacing"),

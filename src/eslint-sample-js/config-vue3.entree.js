@@ -9,7 +9,13 @@ import plugin_vue_processor from "eslint-plugin-vue/lib/processor.js";
 import parser_vue from "vue-eslint-parser";
 
 /**
- * Provides the needed plugin and parser config.
+ * Provides the needed plugin and parser config for Vue 3 with:
+ * - TypeScript support in `<script>` blocks and template expressions
+ * - Single File Components
+ * - Composition API
+ * - and `<script setup>`
+ * 
+ * https://eslint.vuejs.org/
  * 
  * @template { Partial<import("eslint-define-config").Rules> } T
  * @param { T } rules
@@ -17,6 +23,7 @@ import parser_vue from "vue-eslint-parser";
 function config_vue(rules) {
     const GLOB_VUE = "**/*.vue";
     const GLOB_SVG_VUE = "**/*.svg.vue";
+
     const flatConfig_vue = defineFlatConfig({
         files:   [GLOB_VUE],
         ignores: [GLOB_SVG_VUE],
@@ -42,6 +49,7 @@ function config_vue(rules) {
         },
         rules,
     });
+
     return flatConfig_vue;
 }
 

@@ -33,26 +33,29 @@ Create the ESLint [flat config](https://eslint.org/docs/latest/use/configure/con
 > `eslint.config.js`
 ```ts
 // @ts-check
-import { entreeDefineRules, entree_rules_typeScript, entreeFilterRules, defineFlatConfig, entreeConfigs } from "@danwithabox/eslint-entree";
-
-const rulesCandidates = entreeDefineRules({
-    ...entree_rules_typeScript(), // a sane, minimal set of rules, to quickly pick and choose from
-});
+import { defineFlatConfig, entreeFilterRules, entreeConfigs, entreeRules } from "@danwithabox/eslint-entree";
 
 // type-safe filtering of candidate rules
-const rules = entreeFilterRules(rulesCandidates, {
+const typeScriptRules = entreeFilterRules(entreeRules.typeScript(), {
+    exclude: [],
+});
+const vue3Rules = entreeFilterRules(entreeRules.vue3(), {
     exclude: [],
 });
 
 export default defineFlatConfig([
-    ...entreeConfigs.typeScriptExample({
-        typeScriptRules: rules,
-        gitignore: true, // Uses "eslint-config-flat-gitignore" under the hood to take `.gitignore` files into account
+    ...entreeConfigs.vue3({
+        typeScriptRules,
+        vue3Rules,
+        gitignore: true, // Uses "eslint-config-flat-gitignore" under the hood to take .gitignore files into account
     }),
 ]);
 ```
 
-Now run `npx eslint` to see the rules from `entree_rules_typeScript()` in action.
+> [!NOTE]
+> Use `entreeConfigs.typeScript()` instead of `entreeConfigs.vue3()` without `vue3Rules` if you just want TypeScript support!
+
+Now run `npx eslint` to see the rules from `entreeRules.typeScript()` in action.
 
 ### Filtering
 
@@ -66,7 +69,7 @@ First apply `exclude` to ignore a very common issue, to "de-noise" the lint warn
 
 ```ts
 // type-safe filtering of candidate rules
-const rules = entreeFilterRules(rulesCandidates, {
+const typeScriptRules = entreeFilterRules(entreeRules.typeScript(), {
     exclude: [
         "@stylistic/comma-dangle",
     ],
@@ -79,7 +82,7 @@ Provide those rules to `pick`:
 
 ```ts
 // type-safe filtering of candidate rules
-const rules = entreeFilterRules(rulesCandidates, {
+const typeScriptRules = entreeFilterRules(entreeRules.typeScript(), {
     exclude: [
         "@stylistic/comma-dangle",
     ],
@@ -107,7 +110,7 @@ Fix them manually, then repeat the process:
 Editor support is lovely:
 - VSCode can highlight linting issues in-editor with the [official ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) installed
 - the extension's log can be seen in VSCode's Output tab, check that if something feels off
-- you may find that you have to restart the ESLint server for VSCode to pick up config changes
+- you may find that you have to run `ESLint: Restart ESLint Server`, or even `Developer: Reload Window` from the VSCode command palette to pick up config changes
 
 For what it's worth, as of writing this, my project-level `.vscode/settings.json` files look like this:
 ```json
@@ -134,16 +137,10 @@ For what it's worth, as of writing this, my project-level `.vscode/settings.json
 }
 
 ```
-## Copy
-vscode github peek extension
-    not the bundled!
-look for src/eslint-entree-sample-js/
-    should be config-*.entree.js
-jsdocs for all eslintConfigs.* and eslintRules.*
-    pointing to docs
-[Samples to copy for yourself](src/eslint-entree-sample-js/readme.md)
-TODO: enable typescript-eslint types
-TODO: documentation should cover how to ditch `entreeDefineRules()`
+### Beyond
+To make copying and internalizing this repo's features for your own `eslint.config.js` file that much easier, I wrote all ESLint-related files in plain JS.
+
+Head on over to [the `src/eslint-sample-js/` folder's readme](src/eslint-entree-sample-js/readme.md) for more about internalizing code from this repo.
 
 ## Goals
 
@@ -189,8 +186,6 @@ Keeping `entreeDefineRules()` and `entreeFilterRules()` can be beneficial, as th
 The ESLint team is [adamant about only supporting  `.js` config files](https://github.com/eslint/rfcs/pull/50#issuecomment-595916427), and I respect that.
 
 An unfortunate effect of that, however, is underdeveloped type-safety for ESLint plugins. Lots of rules have no type definitions for their options. I made an effort to enhance my utils with types where possible, but you will most likely be relying on documentations for options instead of the IDE, and that's normal.
-
-An exception to that are the core ESLint rules, they are well-typed, and `entreeDefineRules()` makes use of it.
 
 ### This library will **NOT** provide the [fancy sort of typescript-eslint rules](https://typescript-eslint.io/getting-started/typed-linting)
 

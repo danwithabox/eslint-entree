@@ -2,7 +2,11 @@ import type { Rules } from "eslint-define-config";
 import type { Simplify } from "type-fest";
 /**
  * A simple helper to make working with rules in `@ts-check`-enabled files easier
- * by returning a narrowly typed object with explicitly known keys. Useful when filtering.
+ * by returning a narrowly typed object with explicitly known keys.
+ * 
+ * Needed for {@link entreeFilterRules} to work correctly.
+ * 
+ * Is not not needed for ESLint otherwise.
  */
 export function entreeDefineRules<T extends Partial<Rules>>(rules: T) { return rules; }
 

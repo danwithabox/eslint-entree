@@ -1,6 +1,11 @@
 // @ts-check
 import { entreeDefineRules } from "../entree-utils.js";
 
+/**
+ * Combines all hand-picked rule collections for TypeScript.
+ * 
+ * https://typescript-eslint.io/
+ */
 export function typeScript() {
     const rules = entreeDefineRules({
         ...typeScript_eslint(),
@@ -14,6 +19,11 @@ export function typeScript() {
     return rules;
 }
 
+/**
+ * You may want to use the full set of rules provided by `typeScript()`: {@link typeScript}
+ * 
+ * Subset selected from https://eslint.org/docs/latest/rules/
+ */
 export function typeScript_eslint() {
     return entreeDefineRules({
         "no-compare-neg-zero":          ["error"],
@@ -44,6 +54,11 @@ export function typeScript_eslint() {
     });
 }
 
+/**
+ * You may want to use the full set of rules provided by `typeScript()`: {@link typeScript}
+ * 
+ * Subset selected from https://eslint.style/packages/default
+ */
 export function typeScript_stylistic() {
     return entreeDefineRules({
         "@stylistic/type-annotation-spacing":     ["warn", { before: false, after: true, overrides: { arrow: { before: true, after: true, }, }, }],
@@ -96,7 +111,11 @@ export function typeScript_stylistic() {
     });
 }
 
-/** Subset selected from https://typescript-eslint.io/rules/?=recommended-xtypeInformation */
+/**
+ * You may want to use the full set of rules provided by `typeScript()`: {@link typeScript}
+ * 
+ * Subset selected from https://typescript-eslint.io/rules/?=recommended-xtypeInformation
+ */
 export function typeScript_filteredBy_recommended() {
     return entreeDefineRules({
         "@typescript-eslint/ban-ts-comment": ["error", {
@@ -125,7 +144,11 @@ export function typeScript_filteredBy_recommended() {
     });
 }
 
-/** Subset selected from https://typescript-eslint.io/rules/?=stylistic-xtypeInformation */
+/**
+ * You may want to use the full set of rules provided by `typeScript()`: {@link typeScript}
+ * 
+ * Subset selected from https://typescript-eslint.io/rules/?=stylistic-xtypeInformation
+ */
 export function typeScript_filteredBy_tsStylistic() {
     return entreeDefineRules({
         "@typescript-eslint/consistent-type-assertions": ["warn", {
@@ -136,7 +159,11 @@ export function typeScript_filteredBy_tsStylistic() {
     });
 }
 
-/** Subset selected from https://typescript-eslint.io/rules/?=xrecommended-strict-xstylistic-xtypeInformation */
+/**
+ * You may want to use the full set of rules provided by `typeScript()`: {@link typeScript}
+ * 
+ * Subset selected from https://typescript-eslint.io/rules/?=xrecommended-strict-xstylistic-xtypeInformation
+ */
 export function typeScript_filteredBy_strict() {
     return entreeDefineRules({
         "@typescript-eslint/no-invalid-void-type": ["warn", {
@@ -148,7 +175,11 @@ export function typeScript_filteredBy_strict() {
     });
 }
 
-/** Subset selected from https://typescript-eslint.io/rules/?=xrecommended-xstrict-xstylistic-xtypeInformation-xdeprecated */
+/**
+ * You may want to use the full set of rules provided by `typeScript()`: {@link typeScript}
+ * 
+ * Subset selected from https://typescript-eslint.io/rules/?=xrecommended-xstrict-xstylistic-xtypeInformation-xdeprecated
+ */
 export function typeScript_filteredBy_miscellaneous() {
     return entreeDefineRules({
         "@typescript-eslint/no-import-type-side-effects": ["warn"],
