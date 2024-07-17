@@ -35,7 +35,6 @@ Create the ESLint [flat config](https://eslint.org/docs/latest/use/configure/con
 // @ts-check
 import { defineFlatConfig, entreeFilterRules, entreeConfigs, entreeRules } from "@danwithabox/eslint-entree";
 
-// type-safe filtering of candidate rules
 const typeScriptRules = entreeFilterRules(entreeRules.typeScript(), {
     exclude: [],
 });
