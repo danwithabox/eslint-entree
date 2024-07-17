@@ -7,9 +7,10 @@
         "node": "^18.18.0 || >=20.0.0"
     },
     "keywords": [
-        "eslint-config",
-        "eslint-entree",
         "eslint",
+        "eslint-entree",
+        "entree",
+        "appetizer",
         "starter",
         "adoption",
         "typescript",
