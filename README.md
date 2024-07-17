@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Focusing on helping you with an incremental, non-jarring adoption of ESLint for TypeScript and Vue.
+Helping you incrementally adopt ESLint rules for TypeScript and Vue projects.
 
 ## Overview
 
@@ -140,7 +140,7 @@ For what it's worth, as of writing this, my project-level `.vscode/settings.json
 ### Beyond
 To make copying and internalizing this repo's features for your own `eslint.config.js` file that much easier, I wrote all ESLint-related files in plain JS.
 
-Head on over to [the `src/eslint-sample-js/` folder's readme](src/eslint-entree-sample-js/readme.md) for more about internalizing code from this repo.
+Head on over to [the `src/eslint-sample-js/` folder's readme](src/eslint-sample-js/readme.md) for more about internalizing code from this repo.
 
 ## Goals
 
