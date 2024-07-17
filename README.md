@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Helping you incrementally adopt ESLint rules for TypeScript and Vue projects.
+ESLint entrée ([/ˈɑntɹeɪ/](https://en.wiktionary.org/wiki/entr%C3%A9e)) helps you with incrementally adopting ESLint rules for TypeScript and Vue projects.
 
 ## Overview
 
@@ -15,11 +15,11 @@ What I wished for was:
 - a quick way to see ESLint in action in an existing codebase
 - tools to type-safely define rules I'm interested in
 - tools to enable those rules incrementally, adapting the codebase rule-by-rule
-- a working setup I could dig into to study, copy, and in-house it
+- a working setup I could inspect to study, copy, and internalize it
 
 This package is what I settled on.
 
-And this readme is your one-stop-shop for getting your first ESLint-enabled project up-and-running for TypeScript!
+And this readme is your one-stop shop for getting your first ESLint-enabled project up and running!
 
 ## Guide
 
@@ -62,6 +62,8 @@ const eslintTest = {a: 1,
 Now, to see ESLint in action, run `npx eslint eslint.config.js` (or just `npx eslint`):
 
 ![npx eslint result](./.github/img/readme_eslint-test_cli.png)
+
+_🎉 Congratulations! You just skipped having to figure out config files, browsing for your first rules, and installing ESLint to have the right command be available!_
 
 Next, we'll see how to highlight linting issues in VSCode, without running `npx eslint`.
 
