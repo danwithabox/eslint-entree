@@ -3,9 +3,8 @@ import { computed, ref } from "vue";
 function sandbox() {
     const someRef = ref();
 
-    const obj = {
-        a: 1,
-        b:  2
+    const obj = {a: 1,
+        b:  2+1
     };
 
     const computed_withSideEffect = computed(() => {

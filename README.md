@@ -49,21 +49,24 @@ export default defineFlatConfig([
         gitignore: true, // Uses "eslint-config-flat-gitignore" under the hood to take .gitignore files into account
     }),
 ]);
+
+const eslintTest = {a: 1,
+    b:  2+1
+};
+
 ```
 
 > [!NOTE]
 > Use `entreeConfigs.typeScript()` instead of `entreeConfigs.vue3()` without `vue3Rules` if you just want TypeScript support!
 
-Now run `npx eslint` to see ESLint in action.
+Now, to see ESLint in action, run `npx eslint eslint.config.js` (or just `npx eslint`):
+
+![image](https://github.com/user-attachments/assets/8243060d-15de-4508-af57-484eb956755c)
 
 Next, we'll see how to highlight linting issues in VSCode, without running `npx eslint`.
 
 ### Configure VSCode
 Install the [official ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and that should be it!
-
-The `eslint.config.js` file itself is checked too, remove an extra trailing comma somewhere to see if VSCode highlights the missing comma as a lint issue!
-
-![image](https://github.com/user-attachments/assets/90e30055-46d3-48cb-a814-f337d47582e1)
 
 If not:
 - you may find that you have to run `ESLint: Restart ESLint Server`, or even `Developer: Reload Window` from the VSCode command palette to pick up config changes
