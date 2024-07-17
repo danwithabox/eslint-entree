@@ -182,14 +182,14 @@ I first wanted to extract them into their own packages, but the fracturing was m
 I may add more configs in the future, if I start using additional stuff.
 
 ### Being a source of truth for the latest-and-greatest in ESLint
-I aim to keep all contained plugins and configs up-to-date, handle deprecations, and to adopt improvements to ESLint as soon as possible.
+I aim to keep all contained plugins and configs up-to-date, handle deprecations, and to adopt ESLint improvements as soon as possible.
 
 ### Keeping it vanilla
-There are some fancy things, like [antfu's solution to support `.ts` configs](https://www.npmjs.com/package/eslint-ts-patch). It's very nice, but it's also incompatible with [the above goal](#use-this-package-as-a-starting-point-for-your-own-config) - I want people to be able to copy-paste from this source into their own ESLint config and have it work without further considerations.
+There are some fancy things, like [antfu's solution to support `.ts` configs](https://www.npmjs.com/package/eslint-ts-patch). It's neat, but it's also incompatible with [the above goal](#use-this-package-as-a-starting-point-for-your-own-config) - I want people to be able to copy-paste from this source into their own ESLint config and have it work without further considerations.
 
-This is why this repo is built upon `.js` files where ESLint is used, since [that's what the ESLint team officially supports](https://github.com/eslint/rfcs/pull/50#issuecomment-595916427).
+This is why this repo is built upon `.js` files where ESLint is used, since [that's what the ESLint team officially supports](https://github.com/eslint/rfcs/pull/50#issuecomment-595916427). Fortunately, JSDoc and `@ts-check` is enough to express and use TypeScript types in `.js` files too.
 
-Fortunately, JSDoc and `@ts-check` is enough to express and use TypeScript types in `.js` files too.
+For the files, see [Guide - Beyond](#beyond).
 
 ## Non-goals
 

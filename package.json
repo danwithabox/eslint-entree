@@ -1,6 +1,6 @@
 {
     "name": "@danwithabox/eslint-entree",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "description": "An appetizer for linting 🥂",
     "type": "module",
     "engines": {
@@ -13,10 +13,23 @@
         "appetizer",
         "starter",
         "adoption",
+        "config",
+        "configuration",
+        "define-config",
+        "eslint-config",
+        "eslint",
+        "eslintconfig",
+        "typed",
         "typescript",
         "vue",
         "vue3"
     ],
+    "author": "danwithabox <danwithabox@gmail.com> (https://github.com/danwithabox)",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/danwithabox/eslint-entree.git"
+    },
     "main": "./lib/index.cjs",
     "module": "./lib/index.js",
     "types": "./lib/index.d.ts",
@@ -35,8 +48,6 @@
     "files": [
         "lib"
     ],
-    "author": "danwithabox <danwithabox@gmail.com> (https://github.com/danwithabox)",
-    "license": "MIT",
     "scripts": {
         "build": "tsup && publint",
         "prepack": "npm run build",
