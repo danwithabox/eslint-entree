@@ -30,6 +30,9 @@
         "type": "git",
         "url": "git+https://github.com/danwithabox/eslint-entree.git"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "main": "./lib/index.cjs",
     "module": "./lib/index.js",
     "types": "./lib/index.d.ts",
