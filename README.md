@@ -61,14 +61,14 @@ const eslintTest = {a: 1,
 
 Now, to see ESLint in action, run `npx eslint eslint.config.js` (or just `npx eslint`):
 
-![image](https://github.com/user-attachments/assets/f4f24751-ea71-481c-9b96-d61cc31996ce)
+![npx eslint result](./.github/img/349510882-f4f24751-ea71-481c-9b96-d61cc31996ce.png)
 
 Next, we'll see how to highlight linting issues in VSCode, without running `npx eslint`.
 
 ### Configure VSCode
 Install the [official ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and that should be it!
 
-![image](https://github.com/user-attachments/assets/8243060d-15de-4508-af57-484eb956755c)
+![ESLint extension linting highlight](./.github/img/349512113-8243060d-15de-4508-af57-484eb956755c.png)
 
 If not:
 - you may find that you have to run `ESLint: Restart ESLint Server`, or even `Developer: Reload Window` from the VSCode command palette to pick up config changes
