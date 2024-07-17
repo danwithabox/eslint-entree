@@ -14,4 +14,4 @@ The files in this folder contain helpful bits of knowledge that you otherwise wo
 
 ## Browsing the code
 
-I recommend using the [GitHub Repositories](https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub) VSCode extension to browse these files without having to clone the repo.
+I recommend using the [GitHub Repositories](https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub) extension to inspect these files with the full power of VSCode, without having to clone the repo.

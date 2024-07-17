@@ -61,14 +61,14 @@ const eslintTest = {a: 1,
 
 Now, to see ESLint in action, run `npx eslint eslint.config.js` (or just `npx eslint`):
 
-![npx eslint result](./.github/img/349510882-f4f24751-ea71-481c-9b96-d61cc31996ce.png)
+![npx eslint result](./.github/img/readme_eslint-test_cli.png)
 
 Next, we'll see how to highlight linting issues in VSCode, without running `npx eslint`.
 
 ### Configure VSCode
 Install the [official ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and that should be it!
 
-![ESLint extension linting highlight](./.github/img/349512113-8243060d-15de-4508-af57-484eb956755c.png)
+![ESLint extension linting highlight](./.github/img/readme_eslint-test_vscode.png)
 
 If not:
 - you may find that you have to run `ESLint: Restart ESLint Server`, or even `Developer: Reload Window` from the VSCode command palette to pick up config changes
@@ -107,7 +107,7 @@ Let's say you're in an existing, messy codebase, and `npx eslint` spit out an ov
 
 An ergonomic and quick way to cut down on the noise, and see your codebase issues one rule at a time, is to adjust the filter.
 
-The filter has two properties: `exclude`, and `include`. Both provide type-safe autocompletion of rules defined using `entreeDefineRules()`.
+The filter has two properties: `exclude`, and `include`.
 
 First apply `exclude` to ignore a very common issue, to "de-noise" the lint warnings:
 
@@ -119,6 +119,11 @@ const typeScriptRules = entreeFilterRules(entreeRules.typeScript(), {
     ],
 });
 ```
+
+> [!NOTE]
+> As long as `entreeFilterRules()` receives a well-typed object, like the result of `entreeDefineRules()`, `exclude`, and `include` will provide autocompletion suggestions:
+> 
+> ![Type-safe rule filtering](./.github/img/readme_filter_autocomplete.png)
 
 Run `npx eslint`, and from the less noisy output, identify some rules you want to actually focus on fixing.
 
@@ -159,11 +164,11 @@ Head on over to [the `src/eslint-sample-js/` folder's readme](src/eslint-sample-
 
 ### Use this package as a starting point for your own config
 
-This package encourages you to familiarize yourself with ESLint through it, but not necessarily to keep it in your code forever. 
+This package encourages you to familiarize yourself with ESLint through it, but not necessarily to keep it in your dependencies forever. 
 
-*Copy my homework, but change it up a little bit!*
+*Copy my homework, but change it up a bit!*
 
-I wrote this package with copying bits of it in mind. Especially the TypeScript and Vue configs, they are a good starting point to base your own config off of!
+I wrote this package with goal of being able to inspect it, copying the bits you want, basing your own config off of it!
 
 ### Sane defaults, all of them skippable
 The bundled rules and configs are completely subjective and of my own taste. I like stylistic fixes, and I like TypeScript and Vue, so I bundled these.
