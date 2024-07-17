@@ -55,7 +55,47 @@ export default defineFlatConfig([
 > [!NOTE]
 > Use `entreeConfigs.typeScript()` instead of `entreeConfigs.vue3()` without `vue3Rules` if you just want TypeScript support!
 
-Now run `npx eslint` to see the rules from `entreeRules.typeScript()` in action.
+Now run `npx eslint` to see ESLint in action.
+
+Next, we'll see how to highlight linting issues in VSCode, without running `npx eslint`.
+
+### Configure VSCode
+Install the [official ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and that should be it!
+
+The `eslint.config.js` file itself is checked too, remove an extra trailing comma somewhere to see if VSCode highlights the missing comma as a lint issue!
+
+![image](https://github.com/user-attachments/assets/90e30055-46d3-48cb-a814-f337d47582e1)
+
+If not:
+- you may find that you have to run `ESLint: Restart ESLint Server`, or even `Developer: Reload Window` from the VSCode command palette to pick up config changes
+- the extension's log can be seen in VSCode's Output tab (in the panel where the Terminal usually is), or in the bottom right of the status bar there may be a red "ESLint" button - check that if something still seems to be wrong
+
+It's also recommended to enable lint-on-save, my project-level `.vscode/settings.json` file looks like this:
+```json
+{
+    "eslint.useFlatConfig": true,
+    "eslint.format.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "never",
+    },
+
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.formatOnSave": true,
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.formatOnSave": true,
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+        "editor.formatOnSave": true,
+    },
+}
+```
+
+You can use `File: Save without Formatting` from the VSCode command palette if you want to skip lint-on-save on occasion.
 
 ### Filtering
 
@@ -106,37 +146,6 @@ Fix them manually, then repeat the process:
 - fix issues identified by `npx eslint`
 - repeat
 
-### Configure VSCode
-Editor support is lovely:
-- VSCode can highlight linting issues in-editor with the [official ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) installed
-- the extension's log can be seen in VSCode's Output tab, check that if something feels off
-- you may find that you have to run `ESLint: Restart ESLint Server`, or even `Developer: Reload Window` from the VSCode command palette to pick up config changes
-
-For what it's worth, as of writing this, my project-level `.vscode/settings.json` files look like this:
-```json
-{
-    "eslint.useFlatConfig": true,
-    "eslint.format.enable": true,
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit",
-        "source.organizeImports": "never",
-    },
-
-    "[javascript]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "editor.formatOnSave": true,
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "editor.formatOnSave": true,
-    },
-    "[vue]": {
-        "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-        "editor.formatOnSave": true,
-    },
-}
-
-```
 ### Beyond
 To make copying and internalizing this repo's features for your own `eslint.config.js` file that much easier, I wrote all ESLint-related files in plain JS.
 
