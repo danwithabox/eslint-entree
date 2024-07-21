@@ -1,6 +1,7 @@
 # ESLint entrée - an appetizer for linting 🥂
 
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![NPM Version](https://img.shields.io/npm/v/@danwithabox/eslint-entree)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/npm/l/@danwithabox/eslint-entree?label=License)](https://opensource.org/licenses/MIT)
 
 ESLint entrée ([/ˈɑntɹeɪ/](https://en.wiktionary.org/wiki/entr%C3%A9e)) helps you with incrementally adopting ESLint rules for TypeScript and Vue projects.
 
@@ -65,16 +66,16 @@ Now, to see ESLint in action, run `npx eslint eslint.config.js` (or just `npx es
 
 _🎉 Congratulations! You just skipped having to figure out config files, browsing for your first rules, and installing ESLint to have the right command be available!_
 
-Next, we'll see how to highlight linting issues in VSCode, without running `npx eslint`.
+Next, we'll see how to highlight linting issues in VS Code, without running `npx eslint`.
 
-### Configure VSCode
+### Configure VS Code
 Install the [official ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), and that should be it!
 
 ![ESLint extension linting highlight](./.github/img/readme_eslint-test_vscode.png)
 
 If not:
-- you may find that you have to run `ESLint: Restart ESLint Server`, or even `Developer: Reload Window` from the VSCode command palette to pick up config changes
-- the extension's log can be seen in VSCode's Output tab (in the panel where the Terminal usually is), or in the bottom right of the status bar there may be a red "ESLint" button - check that if something still seems to be wrong
+- you may find that you have to run `ESLint: Restart ESLint Server`, or even `Developer: Reload Window` from the V SCode command palette to pick up config changes
+- the extension's log can be seen in VS Code's Output tab (in the panel where the Terminal usually is), or in the bottom right of the status bar there may be a red "ESLint" button - check that if something still seems to be wrong
 
 It's also recommended to enable lint-on-save, my project-level `.vscode/settings.json` file looks like this:
 ```json
@@ -101,7 +102,7 @@ It's also recommended to enable lint-on-save, my project-level `.vscode/settings
 }
 ```
 
-You can use `File: Save without Formatting` from the VSCode command palette if you want to skip lint-on-save on occasion.
+You can use `File: Save without Formatting` from the VS Code command palette if you want to skip lint-on-save on occasion.
 
 ### Filtering
 

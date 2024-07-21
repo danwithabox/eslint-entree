@@ -1,6 +1,6 @@
 {
     "name": "@danwithabox/eslint-entree",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "description": "An appetizer for linting 🥂",
     "type": "module",
     "engines": {
@@ -52,15 +52,21 @@
         "lib"
     ],
     "scripts": {
+        "prepare": "husky || true",
         "build": "tsup && publint",
+        "test": "echo No tests yet",
         "prepack": "npm run build",
         "prepublishOnly": "npm run build",
         "type-check": "tsc --noEmit"
     },
     "devDependencies": {
+        "@commitlint/cli": "^19.3.0",
+        "@commitlint/config-conventional": "^19.2.2",
         "@eslint-types/typescript-eslint": "^7.5.0",
         "@types/node": "^20.14.10",
+        "husky": "^9.1.1",
         "publint": "^0.2.8",
+        "semantic-release": "^24.0.0",
         "tsup": "^8.1.0",
         "typescript": "^5.5.3",
         "vue": "^3.4.31"
