@@ -173,7 +173,7 @@ export function vue3_uncategorized() {
     return entreeDefineRules({
         "vue/block-order":                   ["warn", { order: ["template", "script:not([setup])", "script[setup]", "style[scoped]", "style:not([scoped])"], }],
         "vue/no-duplicate-attr-inheritance": ["error"],
-        "vue/no-required-prop-with-default": ["error", { autofix: true, }],
+        "vue/no-required-prop-with-default": ["warn", { autofix: true, }],
         "vue/no-restricted-v-bind":          ["error", {
             argument: "/^v-/",
             message:  "Using `:v-xxx` is not allowed. Instead, remove `:` and use it as directive.",
