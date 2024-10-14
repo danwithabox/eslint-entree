@@ -6,3 +6,23 @@ find the full documentation for it [in our repository](https://github.com/change
 
 We have a quick list of common questions to get you started engaging with this project in
 [our documentation](https://github.com/changesets/changesets/blob/main/docs/common-questions.md)
+
+## Common commands
+
+### Adding changesets
+`npx changeset`
+
+> Note: You can run changeset add to add a changeset if you want to, but running Changesets without any command works as well.
+
+### Versioning and publishing
+Once you decide you want to do a release, you can run
+
+`npx changeset version`
+
+This consumes all changesets, and updates to the most appropriate semver version based on those changesets. It also writes changelog entries for each consumed changeset.
+
+We recommend at this step reviewing both the changelog entries and the version changes for packages. Once you are confident that these are correct, and have made any necessary tweaks to changelogs, you can publish your packages:
+
+`npx changeset publish`
+
+This will run npm publish in each package that is of a later version than the one currently listed on npm.
