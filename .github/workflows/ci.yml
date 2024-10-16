@@ -1,4 +1,4 @@
-name: Node.js Package
+name: CI
 
 on:
   push:
@@ -38,13 +38,13 @@ jobs:
         run: npm run test
 
   publish-npm:
-    name: Publish - NPM
+    name: Create Release Pull Request or Publish to NPM
     needs: [build, test]
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
       id-token: write
-    # environment: publish-with-review
     concurrency: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Checkout repository
@@ -55,7 +55,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Create Release Pull Request or Publish to npm
+      - name: Create Release Pull Request or Publish to NPM
         id: changesets
         uses: changesets/action@v1
         with:
