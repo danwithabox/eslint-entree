@@ -55,9 +55,8 @@
         "prepare": "husky || true",
         "build": "tsup && publint",
         "test": "echo No tests yet",
-        "prepack": "npm run build",
-        "prepublishOnly": "npm run build",
-        "type-check": "tsc --noEmit"
+        "type-check": "tsc --noEmit",
+        "changeset:help": "echo You probably want to run `npx changeset`. Check out `.changeset/README.md` for more."
     },
     "devDependencies": {
         "@commitlint/cli": "^19.3.0",
