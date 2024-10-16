@@ -1,5 +1,11 @@
 # @danwithabox/eslint-entree
 
+## 0.5.1
+
+### Patch Changes
+
+- 63c0b54: ci(devops): refactors, changesets bot
+
 ## 0.5.0
 
 ### Minor Changes
