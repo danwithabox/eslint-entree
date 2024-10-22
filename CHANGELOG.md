@@ -1,5 +1,11 @@
 # @danwithabox/eslint-entree
 
+## 0.5.2
+
+### Patch Changes
+
+- 5793241: ci: publishing adapted to Changesets
+
 ## 0.5.1
 
 ### Patch Changes
