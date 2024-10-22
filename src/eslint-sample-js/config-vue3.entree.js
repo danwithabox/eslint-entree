@@ -2,7 +2,6 @@
 import { defineFlatConfig } from "eslint-define-config";
 import plugin_stylistic from "@stylistic/eslint-plugin";
 import typescript_eslint from "typescript-eslint";
-// @ts-expect-error: No type definition
 import plugin_vue from "eslint-plugin-vue";
 // @ts-expect-error: No type definition
 import plugin_vue_processor from "eslint-plugin-vue/lib/processor.js";

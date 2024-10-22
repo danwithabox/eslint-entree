@@ -52,6 +52,8 @@
         "lib"
     ],
     "scripts": {
+        "prepack": "publint",
+        "prepublishOnly": "publint",
         "prepare": "husky || true",
         "build": "tsup && publint",
         "test": "echo No tests yet",
@@ -59,13 +61,13 @@
         "changeset:help": "echo You probably want to run `npx changeset`. Check out `.changeset/README.md` for more."
     },
     "devDependencies": {
+        "@changesets/cli": "^2.27.9",
         "@commitlint/cli": "^19.3.0",
         "@commitlint/config-conventional": "^19.2.2",
         "@eslint-types/typescript-eslint": "^7.5.0",
-        "@types/node": "^20.14.10",
+        "@types/node": "20.16.14",
         "husky": "^9.1.1",
         "publint": "^0.2.8",
-        "semantic-release": "^24.0.0",
         "tsup": "^8.1.0",
         "typescript": "^5.5.3",
         "vue": "^3.4.31"
@@ -74,9 +76,8 @@
         "eslint": "^9.7.0"
     },
     "dependencies": {
-        "@changesets/cli": "^2.27.9",
         "@stylistic/eslint-plugin": "^2.3.0",
-        "eslint-config-flat-gitignore": "^0.1.7",
+        "eslint-config-flat-gitignore": "^0.3.0",
         "eslint-define-config": "^2.1.0",
         "eslint-plugin-vue": "^9.27.0",
         "type-fest": "^4.21.0",
