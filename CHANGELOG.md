@@ -1,5 +1,11 @@
 # @danwithabox/eslint-entree
 
+## 0.5.3
+
+### Patch Changes
+
+- 54b0732: chore: updated dependencies
+
 ## 0.5.2
 
 ### Patch Changes
