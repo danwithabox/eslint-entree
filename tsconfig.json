@@ -16,6 +16,7 @@
         "declarationMap": true,
         "outDir": "./lib",
         "rootDir": ".",
+        "jsx": "preserve",
         "types": [
             "node"
         ]
