@@ -1,5 +1,11 @@
 # @danwithabox/eslint-entree
 
+## 0.6.0
+
+### Minor Changes
+
+- 6911277: feat: added initial React (with TypeScript) config based on what `npm create vite@latest ./ -- --template react-ts` generated
+
 ## 0.5.3
 
 ### Patch Changes
