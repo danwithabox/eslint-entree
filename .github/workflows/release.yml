@@ -12,8 +12,9 @@ jobs:
     name: Build, Check, Test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
 
       - name: Build
         uses: ./.github/actions/build
@@ -33,15 +34,16 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
 
       - name: Build
         uses: ./.github/actions/build
 
       - name: Create Release PR or Publish to NPM
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@v1.5.3
         with:
           # The pull request title.
           title: 'Changesets Release'
