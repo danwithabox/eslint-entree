@@ -1,5 +1,19 @@
-import type { Rules } from "eslint-define-config";
+import type { Linter } from "eslint";
+import type { RuleOptions as _stylistic_RuleOptions } from "@stylistic/eslint-plugin";
 import type { Simplify } from "type-fest";
+
+type stylistic_RuleOptions = {[K in keyof _stylistic_RuleOptions]?: Linter.RuleEntry<_stylistic_RuleOptions[K]> };
+
+// TODO: check if this is somewhere in the "@stylistic/eslint-plugin" repo
+// Augmentation pattern taken from eslint-plugin-vue/lib/eslint-typegen.d.ts
+declare module "eslint" {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Linter {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    interface RulesRecord extends stylistic_RuleOptions {}
+  }
+}
+
 /**
  * A simple helper to make working with rules in `@ts-check`-enabled files easier
  * by returning a narrowly typed object with explicitly known keys.
@@ -8,7 +22,7 @@ import type { Simplify } from "type-fest";
  * 
  * Is not not needed for ESLint otherwise.
  */
-export function entreeDefineRules<T extends Partial<Rules>>(rules: T) { return rules; }
+export function entreeDefineRules<T extends Linter.RulesRecord>(rules: T) { return rules; }
 
 /**
  * Provide a rules object to receive a getter function that returns the option of the given rule.
@@ -16,7 +30,7 @@ export function entreeDefineRules<T extends Partial<Rules>>(rules: T) { return r
  * Useful for sharing options between a base rule, and a rule that extends the base rule,
  * e.g. in the case of `eslint-plugin-vue` extension rules and the corresponding base `@stylistic` rules.
  */
-export function entreeAdoptOptionsFromRules<T extends Partial<Rules>>(rules: T) {
+export function entreeAdoptOptionsFromRules<T extends Linter.RulesRecord>(rules: T) {
     function getOptionsOf<K extends keyof T>(keyOfRule: K) { return rules[keyOfRule]; }
     return { getOptionsOf, };
 }
@@ -38,7 +52,7 @@ export function entreeAdoptOptionsFromRules<T extends Partial<Rules>>(rules: T) 
  * After everything you picked is done, process the rules that you previously excluded, if there were any.
  */
 export function entreeFilterRules<
-    T extends Partial<Rules>,
+    T extends Linter.RulesRecord,
     const TExcludeKeys extends keyof T,
     const TPickableKeys extends keyof Omit<T, TExcludeKeys>
 >(
@@ -51,7 +65,7 @@ export function entreeFilterRules<
     if (opts === void 0) return rules;
 
     const { exclude, pick, debug = false, } = opts;
-    const rulesFiltered: Partial<Rules> = {};
+    const rulesFiltered: Linter.RulesRecord = {};
 
     if (pick !== void 0) {
         for (const key_picked of pick) rulesFiltered[key_picked as string] = rules[key_picked];

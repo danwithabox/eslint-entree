@@ -6,8 +6,8 @@
     ],
     "compilerOptions": {
         "skipLibCheck": true,
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
+        "module": "esnext",
+        "moduleResolution": "bundler",
         "verbatimModuleSyntax": true,
         "strict": true,
         "allowJs": true,

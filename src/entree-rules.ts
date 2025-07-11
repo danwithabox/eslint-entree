@@ -1,6 +1,6 @@
-import * as rules_typeScript from "./eslint-sample-js/rules-typescript.entree";
-import * as rules_vue3 from "./eslint-sample-js/rules-vue3.entree";
-import * as rules_react from "./eslint-sample-js/rules-react.entree";
+import * as rules_typeScript from "./eslint-sample-js/rules-typescript.entree.js";
+import * as rules_vue3 from "./eslint-sample-js/rules-vue3.entree.js";
+import * as rules_react from "./eslint-sample-js/rules-react.entree.js";
 
 /**
  * Every collection of hand-picked rules.

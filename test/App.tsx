@@ -2,17 +2,17 @@ import { useState } from "react";
 
 const asd = [
     1,
-    2,
-] satisfies any[];
+    2
+] satisfies any[]
 
 function App() {
-    const [count, setCount] = useState(0);
+    const [count, setCount,] = useState(0)
 
     return (
         <>
             <h1>React</h1>
             <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
+                <button onClick={() =>setCount((count) => count + 1)}>
                     count is {count}
                 </button>
                 <p>
