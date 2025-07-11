@@ -1,5 +1,13 @@
 # @danwithabox/eslint-entree
 
+## 0.6.1
+
+### Patch Changes
+
+- 046085f: build: moved to `pnpm`, Volta, and `tsdown`
+- b8ccbaf: ci: improved GitHub Actions
+- a91743c: build: removed commitlint
+
 ## 0.6.0
 
 ### Minor Changes
