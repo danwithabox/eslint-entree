@@ -1,5 +1,11 @@
 # @danwithabox/eslint-entree
 
+## 0.6.1
+
+### Patch Changes
+
+- 046085f: build: moved to `pnpm`, Volta, and `tsdown`
+
 ## 0.6.0
 
 ### Minor Changes
