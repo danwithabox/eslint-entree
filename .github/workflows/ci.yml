@@ -35,10 +35,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Run type check
-        run: npm run type-check
+        run: pnpm run type-check
 
       - name: Run tests
-        run: npm run test
+        run: pnpm run test
 
   publish-npm:
     name: Create Release Pull Request or Publish to NPM
@@ -65,11 +65,11 @@ jobs:
           # The pull request title.
           title: 'Changesets Release'
           # The command to update version, edit CHANGELOG, read and delete changesets.
-          version: 'npx changeset version'
+          version: 'pnpm changeset version'
           # The commit message to use.
           commit: 'chore(changesets): consumed changesets'
           # The command to use to build and publish packages
-          publish: 'npx changeset publish'
+          publish: 'pnpm changeset publish'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true

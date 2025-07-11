@@ -61,7 +61,7 @@
         "prepack": "publint",
         "prepublishOnly": "publint",
         "prepare": "husky || true",
-        "build": "tsup && publint",
+        "build": "tsdown && publint",
         "test": "echo No tests yet",
         "type-check": "tsc --noEmit && echo type-check ✅",
         "changeset:help": "echo You probably want to run `npx changeset`. Check out `.changeset/README.md` for more."
@@ -76,10 +76,10 @@
         "@types/react-dom": "^19.0.3",
         "globals": "^15.14.0",
         "husky": "^9.1.7",
-        "publint": "^0.2.12",
+        "publint": "^0.3.12",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
-        "tsup": "^8.3.5",
+        "tsdown": "^0.12.9",
         "typescript": "^5.5.3",
         "vue": "^3.5.13"
     },

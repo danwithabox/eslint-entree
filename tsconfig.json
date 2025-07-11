@@ -2,7 +2,7 @@
     "exclude": [
         "lib",
         "eslint.config.js",
-        ".tsup"
+        ".tsdown"
     ],
     "compilerOptions": {
         "skipLibCheck": true,
