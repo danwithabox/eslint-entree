@@ -1,23 +1,28 @@
 name: 'Build'
 description: 'Build everything'
-inputs:
-  node-version:
-    description: 'Node Version'
-    required: false
-    default: '20'
 runs:
   using: 'composite'
   steps:
-    - name: Setup Node.js ${{ inputs.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ inputs.node-version }}
-        cache: 'pnpm'
+    - name: Read volta configuration
+      id: volta
+      shell: bash
+      run: |
+        NODE_VERSION=$(jq -r '.volta.node' package.json)
+        PNPM_VERSION=$(jq -r '.volta.pnpm' package.json)
+        echo "node_version=$NODE_VERSION" >> $GITHUB_OUTPUT
+        echo "pnpm_version=$PNPM_VERSION" >> $GITHUB_OUTPUT
 
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
       with:
+        version: ${{ steps.volta.outputs.pnpm_version }}
         run_install: false
+
+    - name: Setup Node.js ${{ steps.volta.outputs.node_version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ steps.volta.outputs.node_version }}
+        cache: 'pnpm'
 
     - name: Install dependencies
       shell: bash

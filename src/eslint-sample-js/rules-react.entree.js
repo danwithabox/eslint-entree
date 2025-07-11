@@ -1,6 +1,5 @@
 // @ts-check
 import { entreeDefineRules } from "../entree-utils.js";
-// @ts-expect-error: No type definition
 import reactHooks from "eslint-plugin-react-hooks";
 
 /**

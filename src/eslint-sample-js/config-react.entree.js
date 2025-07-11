@@ -4,7 +4,6 @@ import { defineFlatConfig } from "eslint-define-config";
 import globals from "globals";
 import plugin_stylistic from "@stylistic/eslint-plugin";
 import typescript_eslint from "typescript-eslint";
-// @ts-expect-error: No type definition
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 
