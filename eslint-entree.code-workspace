@@ -8,6 +8,9 @@
 		"typescript.tsdk": "node_modules\\typescript\\lib",
 		"conventionalCommits.scopes": [
 			"devops"
+		],
+		"cSpell.words": [
+			"tsdown"
 		]
 	}
 }
