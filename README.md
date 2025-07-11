@@ -26,7 +26,14 @@ And this readme is your one-stop shop for getting your first ESLint-enabled proj
 
 ### Install
 ```bash
+# npm
 $ npm install @danwithabox/eslint-entree --save-dev
+
+# pnpm
+$ pnpm add @danwithabox/eslint-entree --save-dev
+
+# yarn
+$ yarn add @danwithabox/eslint-entree --dev
 ```
 
 ### First run
@@ -241,8 +248,15 @@ When I first tried ESLint, I soon faced many questions. Here's my light rant mas
     - yep, and some of them might be even conflicting!
     - and this is why I provide [sane defaults](#sane-defaults-all-of-them-skippable)
 
+## Development
+
+This project uses [Volta](https://volta.sh/) for Node.js version management and [pnpm](https://pnpm.io/) as the package manager.
+
+Volta should be installed globally, and the `"volta"` configuration in `package.json` will automatically use the correct Node.js and pnpm versions.
+
 ## Acknowledgements
 The goals of the package are inspired by [antfu's config](https://github.com/antfu/eslint-config), digging into it helped me get up to speed with ESLint much faster.
 
 ## Feedback & Contribution
 Feel free to voice concerns about ease-of-use, or if you found something confusing in the ESLint ecosystem that should be covered here. This repo is meant to be a help in getting up to speed with ESLint!
+

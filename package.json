@@ -4,8 +4,14 @@
     "description": "An appetizer for linting 🥂",
     "type": "module",
     "engines": {
-        "node": "^18.18.0 || >=20.0.0"
+        "node": "^18.18.0 || >=20.0.0",
+        "pnpm": ">=8.0.0"
     },
+    "volta": {
+        "node": "20.18.1",
+        "pnpm": "9.14.4"
+    },
+    "packageManager": "pnpm@9.14.4",
     "keywords": [
         "eslint",
         "eslint-entree",
