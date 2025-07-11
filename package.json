@@ -70,6 +70,7 @@
         "@changesets/cli": "^2.27.10",
         "@commitlint/cli": "^19.6.0",
         "@commitlint/config-conventional": "^19.6.0",
+        "@commitlint/types": "^19.8.1",
         "@eslint-types/typescript-eslint": "^7.5.0",
         "@types/node": "20.16.14",
         "@types/react": "^19.0.8",
