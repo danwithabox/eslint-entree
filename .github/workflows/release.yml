@@ -1,10 +1,9 @@
-name: CI
+name: Release
 
 on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
   build:
@@ -38,8 +37,6 @@ jobs:
     name: Create Release Pull Request or Publish to NPM
     needs: [build, test]
     runs-on: ubuntu-latest
-    # Only run on pushes to main branch, not on PRs
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
       contents: write
       pull-requests: write
