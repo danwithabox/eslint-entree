@@ -15,8 +15,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: CI
-        uses: ./.github/actions/ci
+      - name: Build
+        uses: ./.github/actions/build
+
+      - name: Run type check
+        run: pnpm run type-check
+
+      - name: Run tests
+        run: pnpm run test
 
   publish-npm:
     name: Create Release PR or Publish to NPM
