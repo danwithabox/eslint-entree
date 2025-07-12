@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const asd = [
-    1,
+1,
     2
 ] satisfies any[]
 
@@ -10,7 +10,7 @@ function App() {
 
     return (
         <>
-            <h1>React</h1>
+        <h1>React</h1>
             <div className="card">
                 <button onClick={() =>setCount((count) => count + 1)}>
                     count is {count}

@@ -1,17 +1,17 @@
 import type { Linter } from "eslint";
 import type { RuleOptions as _stylistic_RuleOptions } from "@stylistic/eslint-plugin";
+import type { RuleOptions as _vue_RuleOptions } from "eslint-plugin-vue/lib/eslint-typegen";
 import type { Simplify } from "type-fest";
 
 type stylistic_RuleOptions = {[K in keyof _stylistic_RuleOptions]?: Linter.RuleEntry<_stylistic_RuleOptions[K]> };
 
-// TODO: check if this is somewhere in the "@stylistic/eslint-plugin" repo
-// Augmentation pattern taken from eslint-plugin-vue/lib/eslint-typegen.d.ts
+// Explicit augmentation even if the packages, e.g. "eslint-plugin-vue/lib/eslint-typegen" already do it, to help the reader in learning
 declare module "eslint" {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Linter {
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    interface RulesRecord extends stylistic_RuleOptions {}
-  }
+    // eslint-disable-next-line @typescript-eslint/no-namespace
+    namespace Linter {
+        // TODO: react types, maybe with eslint-typegen if needed
+        interface RulesRecord extends stylistic_RuleOptions, _vue_RuleOptions {}
+    }
 }
 
 /**
@@ -31,7 +31,11 @@ export function entreeDefineRules<T extends Linter.RulesRecord>(rules: T) { retu
  * e.g. in the case of `eslint-plugin-vue` extension rules and the corresponding base `@stylistic` rules.
  */
 export function entreeAdoptOptionsFromRules<T extends Linter.RulesRecord>(rules: T) {
-    function getOptionsOf<K extends keyof T>(keyOfRule: K) { return rules[keyOfRule]; }
+    function getOptionsOf<K extends keyof T>(keyOfRule: K): NonNullable<T[K]> {
+        const rule = rules[keyOfRule];
+        if (!rule) console.warn(`[entree-utils.ts] Unexpectedly missing rule: "${String(keyOfRule)}". Rules:`, rules);
+        return rule;
+    }
     return { getOptionsOf, };
 }
 

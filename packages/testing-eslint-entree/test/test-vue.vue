@@ -1,5 +1,16 @@
 <template>
-    <div data-foo="bar" class="faff"></div>
+    <div @click="() => {
+        const obj = {
+            a: 1,
+        b: 2,
+        }
+    }" class="classy" data-foo="bar">
+    <!--
+        foo
+    bar
+    -->
+    <div></div>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -11,7 +22,7 @@ let foo = 'bar';
 type Empty = {};
 
 const obj = {
-    a: 1,
+a: 1,
     b: 2,
     c: foo
 };

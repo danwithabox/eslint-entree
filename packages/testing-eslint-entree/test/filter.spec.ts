@@ -1,4 +1,4 @@
-import { entreeDefineRules, entreeFilterRules } from "../src";
+import { entreeDefineRules, entreeFilterRules } from "@danwithabox/eslint-entree";
 
 function sandbox() {
     const rulesAll = entreeDefineRules({

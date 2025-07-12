@@ -1,6 +1,5 @@
 {
-    "name": "eslint-entree-monorepo",
-    "description": "An appetizer for linting 🥂",
+    "name": "testing-eslint-entree",
     "private": true,
     "type": "module",
     "engines": {
@@ -18,20 +17,16 @@
         "type": "git",
         "url": "git+https://github.com/danwithabox/eslint-entree.git"
     },
-    "scripts": {
-        "prepare": "husky || true",
-        "build": "pnpm turbo build",
-        "test": "pnpm turbo test",
-        "type-check": "pnpm turbo type-check",
-        "changeset:help": "echo You probably want to run `npx changeset`. Check out `.changeset/README.md` for more."
-    },
+    "scripts": {},
     "devDependencies": {
-        "@changesets/cli": "^2.27.10",
-        "@danwithabox/eslint-entree": "link:packages/eslint-entree",
+        "@danwithabox/eslint-entree": "link:../eslint-entree",
         "@types/node": "20.16.14",
-        "husky": "^9.1.7",
-        "turbo": "^2.5.4",
-        "typescript": "^5.5.3"
+        "@types/react": "^19.0.8",
+        "@types/react-dom": "^19.0.3",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "typescript": "^5.5.3",
+        "vue": "^3.5.13"
     },
     "peerDependencies": {
         "eslint": "^9.7.0"

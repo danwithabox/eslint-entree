@@ -1,11 +1,16 @@
 {
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "cSpell.words": [
+        "nodenext",
+        "publint",
+        "tsdown"
+    ],
     "eslint.useFlatConfig": true,
     "eslint.format.enable": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
         "source.organizeImports": "never",
     },
-
     "[javascript]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint",
         "editor.formatOnSave": true,
