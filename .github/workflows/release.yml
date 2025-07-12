@@ -7,26 +7,8 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  ci:
-    name: Build, Check, Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4.2.2
-        with:
-          fetch-depth: 0
-
-      - name: Build
-        uses: ./.github/actions/build
-
-      - name: Run type check
-        run: pnpm run type-check
-
-      - name: Run tests
-        run: pnpm run test
-
   publish-npm:
     name: Create Release PR or Publish to NPM
-    needs: [ci]
     runs-on: ubuntu-latest
     permissions:
       contents: write
