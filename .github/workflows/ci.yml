@@ -15,7 +15,7 @@ jobs:
   ci:
     name: Build, Check, Test
     runs-on: ubuntu-latest
-    # Run on all PRs, pushes to changeset branch, and manual dispatch
+    # Run on all PRs, pushes to changeset release branch, and manual dispatch
     if: |
       github.event_name == 'pull_request' ||
       (github.event_name == 'push' && github.ref == 'refs/heads/changeset-release/main') ||
