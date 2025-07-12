@@ -2,6 +2,9 @@ name: CI
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, edited]
+  push:
+    branches: [changeset-release/main]
   workflow_dispatch:
 
 concurrency:
@@ -12,6 +15,11 @@ jobs:
   ci:
     name: Build, Check, Test
     runs-on: ubuntu-latest
+    # Run on all PRs, pushes to changeset branch, and manual dispatch
+    if: |
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'push' && github.ref == 'refs/heads/changeset-release/main') ||
+      github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4.2.2
         with:
