@@ -41,7 +41,7 @@ Create the ESLint [flat config](https://eslint.org/docs/latest/use/configure/con
 > `eslint.config.js`
 ```ts
 // @ts-check
-import { defineFlatConfig, entreeFilterRules, entreeConfigs, entreeRules } from "@danwithabox/eslint-entree";
+import { defineConfig, entreeFilterRules, entreeConfigs, entreeRules } from "@danwithabox/eslint-entree";
 
 const typeScriptRules = entreeFilterRules(entreeRules.typeScript(), {
     exclude: [],
@@ -50,7 +50,7 @@ const vue3Rules = entreeFilterRules(entreeRules.vue3(), {
     exclude: [],
 });
 
-export default defineFlatConfig([
+export default defineConfig([
     ...entreeConfigs.vue3({
         typeScriptRules,
         vue3Rules,
