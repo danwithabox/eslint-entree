@@ -1,7 +1,7 @@
 //@ts-check
-import { defineFlatConfig } from "eslint-define-config";
+import { defineConfig } from "eslint/config";
 import plugin_stylistic from "@stylistic/eslint-plugin";
-import typescript_eslint from "typescript-eslint";
+import tseslint from "typescript-eslint";
 import plugin_vue from "eslint-plugin-vue";
 // @ts-expect-error: No type definition
 import plugin_vue_processor from "eslint-plugin-vue/lib/processor.js";
@@ -16,36 +16,41 @@ import parser_vue from "vue-eslint-parser";
  * 
  * https://eslint.vuejs.org/
  * 
- * @template { Partial<import("eslint-define-config").Rules> } T
+ * @template { import("eslint").Linter.RulesRecord } T
  * @param { T } rules
  */
 function config_vue(rules) {
-    const GLOB_VUE = "**/*.vue";
-    const GLOB_SVG_VUE = "**/*.svg.vue";
+    const GLOB_VUE = ["*.vue", "**/*.vue"];
+    const GLOB_SVG_VUE = ["**/*.svg.vue"];
 
-    const flatConfig_vue = defineFlatConfig({
-        files:   [GLOB_VUE],
-        ignores: [GLOB_SVG_VUE],
+    const flatConfig_vue = defineConfig({
+        files:   [...GLOB_VUE],
+        ignores: [...GLOB_SVG_VUE],
         plugins: {
-            /** @type { import("@stylistic/eslint-plugin/define-config-support") } */
             "@stylistic":         plugin_stylistic,
-            /** @type { any } */
-            "@typescript-eslint": typescript_eslint.plugin,
+            /**
+             * Typing irreconcilable due to:
+             * - https://github.com/un-ts/eslint-plugin-import-x/issues/203
+             * - https://github.com/typescript-eslint/typescript-eslint/issues/10935
+             * - https://github.com/typescript-eslint/typescript-eslint/issues/10899
+             * @type { any }
+             */
+            "@typescript-eslint": tseslint.plugin,
             vue:                  plugin_vue,
         },
-        processor:       plugin_vue_processor,
         languageOptions: {
             parser:        parser_vue,
+            sourceType:    "module",
             parserOptions: {
+                parser:       tseslint.parser,
+                sourceType:   "module",
                 ecmaFeatures: {
                     jsx: false,
                 },
                 extraFileExtensions: [".vue"],
-                /** @type { any } */
-                parser:              typescript_eslint.parser,
-                sourceType:          "module",
             },
         },
+        processor: plugin_vue_processor,
         rules,
     });
 

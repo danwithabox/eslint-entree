@@ -1,8 +1,0 @@
-{
-    "extends": ["../../tsconfig.json"],
-    "compilerOptions": {
-        "module": "NodeNext",
-        // Makes sure relative import paths have to have ".js" extensions
-        "moduleResolution": "NodeNext",
-    }
-}

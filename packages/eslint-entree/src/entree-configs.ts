@@ -1,4 +1,5 @@
-import { defineFlatConfig, type Rules, type FlatESLintConfig } from "eslint-define-config";
+import type { Linter } from "eslint";
+import { defineConfig } from "eslint/config";
 import { config_typescript } from "./eslint-sample-js/config-typescript.entree.js";
 import { config_vue } from "./eslint-sample-js/config-vue3.entree.js";
 import { config_react } from "./eslint-sample-js/config-react.entree.js";
@@ -9,11 +10,11 @@ import { gitignore } from "./index.js";
  */
 function typeScript(config: {
     gitignore:       boolean,
-    typeScriptRules: Partial<Rules>,
-}): Array<FlatESLintConfig> {
+    typeScriptRules: Linter.RulesRecord,
+}): Array<Linter.Config> {
     const { typeScriptRules, gitignore: _gitignore, } = config;
 
-    return defineFlatConfig([
+    return defineConfig([
         ...(_gitignore ? [gitignore()] : []),
         config_typescript(typeScriptRules),
     ]);
@@ -26,12 +27,12 @@ function typeScript(config: {
  */
 function vue3(config: {
     gitignore:       boolean,
-    typeScriptRules: Partial<Rules>,
-    vue3Rules:       Partial<Rules>,
-}): Array<FlatESLintConfig> {
+    typeScriptRules: Linter.RulesRecord,
+    vue3Rules:       Linter.RulesRecord,
+}): Array<Linter.Config> {
     const { typeScriptRules, vue3Rules, gitignore: _gitignore, } = config;
 
-    return defineFlatConfig([
+    return defineConfig([
         ...(_gitignore ? [gitignore()] : []),
         config_typescript(typeScriptRules),
         config_vue({ ...typeScriptRules, ...vue3Rules, }),
@@ -43,12 +44,12 @@ function vue3(config: {
  */
 function react(config: {
     gitignore:       boolean,
-    typeScriptRules: Partial<Rules>,
-    reactRules:      Partial<Rules>,
-}): Array<FlatESLintConfig> {
+    typeScriptRules: Linter.RulesRecord,
+    reactRules:      Linter.RulesRecord,
+}): Array<Linter.Config> {
     const { typeScriptRules, reactRules, gitignore: _gitignore, } = config;
 
-    return defineFlatConfig([
+    return defineConfig([
         ...(_gitignore ? [gitignore()] : []),
         config_typescript(typeScriptRules),
         config_react({ ...typeScriptRules, ...reactRules, }),
