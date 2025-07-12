@@ -1,5 +1,13 @@
 # @danwithabox/eslint-entree
 
+## 0.7.1
+
+### Patch Changes
+
+- 752b820: 💥 Breaking:
+  - the previous version, `0.7.0`, removed the `defineFlatConfig` export in favor of `export { defineConfig } from "eslint/config"`, update code accordingly
+- 752b820: docs: updated references of `defineFlatConfig` to `defineConfig`
+
 ## 0.7.0
 
 ### Minor Changes
