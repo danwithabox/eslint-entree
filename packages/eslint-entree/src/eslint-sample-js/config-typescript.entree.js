@@ -15,6 +15,7 @@ function config_typescript(rules) {
     const flatConfig_typescript = defineConfig({
         files:   [...GLOB_SRC],
         plugins: {
+            /** @type { import("@stylistic/eslint-plugin/define-config-support") } */
             "@stylistic":         plugin_stylistic,
             /**
              * Typing irreconcilable due to:

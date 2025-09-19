@@ -27,6 +27,7 @@ function config_vue(rules) {
         files:   [...GLOB_VUE],
         ignores: [...GLOB_SVG_VUE],
         plugins: {
+            /** @type { import("@stylistic/eslint-plugin/define-config-support") } */
             "@stylistic":         plugin_stylistic,
             /**
              * Typing irreconcilable due to:
@@ -36,6 +37,10 @@ function config_vue(rules) {
              * @type { any }
              */
             "@typescript-eslint": tseslint.plugin,
+            /**
+             * Typing irreconcilable
+             * @type { any }
+             */
             vue:                  plugin_vue,
         },
         languageOptions: {
