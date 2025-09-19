@@ -1,5 +1,12 @@
 # @danwithabox/eslint-entree
 
+## 0.7.2
+
+### Patch Changes
+
+- cbd9e47: fix: moved eslint from peerDependencies to dependencies to have more control over package integrity
+- cbd9e47: chore: updated deps to fix config errors with eslint@9.35.0
+
 ## 0.7.1
 
 ### Patch Changes
